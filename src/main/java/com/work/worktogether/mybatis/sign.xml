@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sign">
+
+    <resultMap id="SignPayMap" type="SignPayVo" autoMapping="true"></resultMap>
+    <resultMap id="SignPayValueMap" type="SignPayValueVo" autoMapping="true"></resultMap>
+    <resultMap id="teamMap" type="TeamVo" autoMapping="true"></resultMap>
+    <resultMap id="DepartmentMap" type="DepartmentVo" autoMapping="true"></resultMap>
+    <resultMap id="TierCodeMap" type="TierCodeVo" autoMapping="true"></resultMap>
+    
+    <resultMap id="employeesMap" type="EmployeesVo" autoMapping="true">
+        <collection property="team" resultMap="teamMap"></collection>
+        <collection property="department" resultMap="DepartmentMap"></collection>
+        <collection property="tierCode" resultMap="TierCodeMap"></collection>
+    </resultMap>
+    
+    
+    <resultMap id="SignMap" type="SignVo" autoMapping="true">
+        <collection property="employees" resultMap="employeesMap"></collection>
+    </resultMap>
+
+    <resultMap id="SignDocumentMap" type="SignDocumentVo" autoMapping="true">
+        <collection property="employees" resultMap="employeesMap"></collection>
+    </resultMap>
+    
+    <select id="signSelect" parameterType="Page" resultMap="SignMap">
+        select DISTINCT s.sno , creDate , finalDate , rejection , e.name , status , kind
+        from sign s
+        join employees e on s.employeeNumber = e.employeeNumber
+        join signDocument sd on sd.signSno = s.sno
+        where (s.employeeNumber like '%${findStr}%' or kind like '%${findStr}%' or status like
+        '%${findStr}%')
+        and sd.employeeNumber = #{employeeNumber} or s.employeeNumber = #{employeeNumber}
+        order by s.sno desc
+        limit #{startNo} , #{listSize}
+    </select>
+
+    <select id="totSize" parameterType="Page" resultType="Integer">
+        select DISTINCT count(s.sno) totSize from sign s
+        join employees e on s.employeeNumber = e.employeeNumber
+        join signDocument sd on sd.signSno = s.sno
+        where (s.employeeNumber like '%${findStr}%' or kind like '%${findStr}%' or status like
+        '%${findStr}%')
+        and sd.employeeNumber = #{employeeNumber}
+    </select>
+
+    <select id="signSno" resultType="Integer">
+        select sno from sign
+        order by sno desc
+        limit 1
+    </select>
+
+    <insert id="signInsert" parameterType="SignVo">
+        insert into sign(sno , creDate , employeeNumber , status , kind)
+        values( #{sno} , sysDate() , #{employeeNumber} , #{status} , #{kind})
+    </insert>
+        <insert id="signInsertBoss" parameterType="SignVo">
+        insert into sign(sno , creDate , employeeNumber , status , kind , finalDate)
+        values( #{sno} , sysDate() , #{employeeNumber} , #{status} , #{kind} , sysDate())
+    </insert>
+
+    <insert id="signPayInsert" parameterType="SignPayVo">
+        insert into signPay(pSno , totAmount , initiativeDate , PaymentDate , expenditure)
+        values(#{pSno} , #{totAmount} , #{initiativeDate} , #{PaymentDate} , #{expenditure})
+    </insert>
+
+    <insert id="signPayValueInsert" parameterType="java.util.List">
+        insert into signPayValue(pSno , briefs , amount , note)
+        values 
+        <foreach collection="list" item="i" separator=",">
+            ( #{i.pSno} , #{i.briefs} , #{i.amount} , #{i.note} )
+        </foreach>
+    </insert>
+
+    <update id="signStatusUpdate" parameterType="Integer">
+        update sign set status = '승인'
+        where sno = #{_parameter}
+    </update>
+
+    <select id="nameSelect" resultType="String" parameterType="String">
+        select name from employees
+        where employeeNumber = #{_parameter}
+    </select>
+
+    <select id="dir" parameterType="String" resultType="EmployeesVo">
+        select dirNumber , tier from employees
+        where employeeNumber = #{_parameter}
+    </select>
+
+    <update id="signCkTime" parameterType="Integer">
+        update sign set finalDate = sysdate()
+        where sno = #{sno}
+    </update>
+
+    <select id="signView" parameterType="Integer" resultType="SignVo">
+        select sno , creDate, finalDate , rejection , employeeNumber ,status , kind
+        from sign
+        where sno = #{_parameter}
+    </select>
+
+    <select id="signPaymentViewSP" parameterType="Integer" resultType="SignPayVo">
+        select sno , pSno , totAmount , initiativeDate , PaymentDate , expenditure from signPay
+        where pSno = #{_parameter}
+    </select>
+    <select id="signPaymentViewSPV" parameterType="Integer" resultType="SpvVo">
+        select sno , pSno , briefs , amount , note from signPayValue
+        where pSno = #{parameter}
+    </select>
+
+    <select id="signDocumentView" parameterType="Integer" resultMap="SignDocumentMap">
+        select s.sno , s.signSno , s.employeeNumber , s.empChecked , e.name , e.tier , t.tierName
+        from signDocument s
+        join employees e on s.employeeNumber = e.employeeNumber
+        join tierCode t on e.tier = t.tier
+        where signSno = #{_paramter}
+    </select>
+
+    <update id="rejectionR" parameterType="SignVo">
+        update sign set rejection = #{rejection} , status = #{status} , finalDate = sysdate()
+        where sno = #{sno}
+    </update>
+
+    <insert id="signVacationInsert" parameterType="SignVacationVo">
+        insert into signVacation(pSno , startDate , endDate , doc)
+        values(#{pSno} , #{startDate} , #{endDate} , #{doc})
+    </insert>
+    
+    <select id="signVacationView" parameterType="Integer" resultType="SignVacationVo">
+        select sno , pSno , startDate , endDate , doc from signVacation
+        where pSno = #{_parameter}
+    </select>
+
+    <update id="signSubmit" parameterType="SignVo">
+        update sign set creDate = sysDate() , status = #{status}
+        where sno = #{sno}
+    </update>
+        <update id="signSubmitBoss" parameterType="SignVo">
+        update sign set creDate = sysDate() , status = #{status} , finalDate = sysDate()
+        where sno = #{sno}
+    </update>
+
+    <update id="signVacationModifyR" parameterType="SignVacationVo">
+        update signVacation set startDate = #{startDate} , endDate = #{endDate} , doc = #{doc}
+        where pSno = #{pSno}
+    </update>
+
+    <update id="signPaymentModifySP" parameterType="SignPayVo">
+        update signPay set totAmount = #{totAmount} , 
+        initiativeDate = #{initiativeDate} , 
+        PaymentDate = #{PaymentDate} , 
+        expenditure = #{expenditure}
+        where pSno = #{pSno};
+    </update>
+
+    <insert id="signDocumentInsert" parameterType="SignDocumentVo">
+        insert into signDocument(signSno , employeeNumber , empChecked)
+        values(#{signSno} , #{employeeNumber} , #{empChecked})
+    </insert>
+
+    <update id="signDocumentUpdate" parameterType="SignDocumentVo">
+        update signDocument set empChecked = #{empChecked}
+        where signSno = #{signSno} and employeeNumber = #{employeeNumber}
+    </update>
+
+    <update id="signDirUpdate" parameterType="SignDocumentVo">
+        update signDocument set employeeNumber = #{employeeNumber}
+        where signSno = #{signSno}
+    </update>
+
+
+    <delete id="signDelete" parameterType="Integer">
+        delete from sign where sno = #{_parameter}
+    </delete>
+    <delete id="signPayDelete" parameterType="Integer">
+        delete from signPay where pSno = #{_parameter}
+    </delete>
+    <delete id="signPayValueDelete" parameterType="Integer">
+        delete from signPayValue where pSno = #{_parameter}
+    </delete>
+    <delete id="signVacationDelete" parameterType="Integer">
+        delete from signVacation where pSno = #{_parameter}
+    </delete>
+    <delete id="signDocumentDelete" parameterType="Integer">
+        delete from signDocument where signSno = #{_parameter}
+    </delete>
+</mapper>

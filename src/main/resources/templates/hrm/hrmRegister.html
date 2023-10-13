@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hrmRegister</title>
+    <link rel="stylesheet" href="/css/hrm/hrmRegister.css">
+    <script defer src="/js/hrm.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</head>
+
+<body>
+    <form name="frmHrm" class="frmHrm" method="post">
+        <div class="preview">
+            <img src="/upload/null.png" class="imagePreview">
+        </div>
+        <input type="file" name="attFile" class="attFile" hidden>
+        <div class="company">
+            <span>회&ensp;사&ensp;명</span>
+            <input type="text" name="comName" class="comName" th:value="${session.comName}" readonly>
+            <br>
+            <span>사&emsp;&emsp;번</span>
+            <input type="text" name="employeeNumber" class="employeeNumber" th:value="${empNum}" readonly>
+            <br>
+            <span>입&ensp;사&ensp;일</span>
+            <input type="date" name="joinCompany" class="joinCompany" th:value="${date}">
+            <br>
+            <span>직&emsp;&emsp;급</span>
+            <select name="tier" class="tier">
+                <th:block th:each="n : ${tier}">
+                    <option th:value="${n.tier}">[[${n.tierName}]]</option>
+                </th:block>
+            </select>
+            <br>
+            <span>부&emsp;&emsp;서</span>
+            <span class="departC">
+                <select name="departCode" class="departCode">
+                    <option value="departAll">*부서를 선택하시오.</option>
+                    <th:block th:each="n : ${department}">
+                        <option th:if="${n.departCode ne 'departAll'}" th:value="${n.departCode}">[[${n.departName}]]</option>
+                    </th:block>
+                </select>
+            </span>
+            <span class="teamC">
+                <select name="teamCode" class="teamCode">
+                    <option value="departAll">*팀을 선택하시오.</option>
+                    <option th:each="n : ${list}" th:value="${n.teamCode}">[[${n.teamName}]]</option>
+                </select>
+            </span>
+            <br>
+            <span>사내번호</span>
+            <input type="text" name="tel" class="tel" placeholder="02-0000-0000">
+            <input type="text" name="dirNumber" class="dirNumber" hidden>
+        </div>
+        <div class="pv" name="pv">
+            <span>아&ensp;이&ensp;디</span>
+            <input type="text" name="id" class="id" placeholder="*ID를 입력하시오" required autocomplete="off">
+            <br>
+            <span>패스워드</span>
+            <input type="text" name="pwd" class="pwd" placeholder="****" autocomplete="off">
+            <br>
+            <span>성&emsp;&emsp;명</span>
+            <input type="text" name="name" class="name" placeholder="*성명을 입력하시오" required autocomplete="off">
+            <br>
+            <span>생년월일</span>
+            <input type="date" name="birthday" class="birthday" th:value="${date}">
+            <br>
+            <span>연&ensp;락&ensp;처</span>
+            <input type="text" name="phone" class="phone" placeholder="*010-0000-0000" autocomplete="off">
+            <br>
+            <span>이&ensp;메&ensp;일</span>
+            <input type="text" name="email" class="email" placeholder="itda@example.com" autocomplete="off">
+            <br>
+            <span>우편번호</span>
+            <input type="text" size="5" name="zipcode" class="zipcode" readonly>
+            <button type="button" class="btnZipcode">우편번호검색</button>
+            <br>
+            <span>주&emsp;&emsp;소</span>
+            <input type="text" name="address1" class="address1" placeholder="주소" autocomplete="off" readonly>
+            <br>
+            <span>상세주소</span>
+            <input type="text" name="address2" class="address2" placeholder="상세주소를 입력하시오." autocomplete="off">
+        </div>
+        <div class="btnZone">
+            <button type="button" name="btnList" class="btnList">목록으로</button>
+            <button type="button" name="btnRegisterR" class="btnRegisterR">저장하기</button>
+        </div>
+        <input type="text" name="findStr" th:value="${page.findStr}" hidden>
+        <input type="text" name="nowPage" th:value="${page.nowPage}" hidden>
+    </form>
+
+</body>
+
+</html>

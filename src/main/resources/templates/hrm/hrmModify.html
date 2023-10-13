@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hrmView</title>
+    <link rel="stylesheet" href="/css/hrm/hrmModify.css">
+    <script defer src="/js/hrm.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</head>
+
+<body>
+    <form name="frmHrm" class="frmHrm" method="post">
+        <div class="preview">
+            <img th:src="${vo.sysPhoto ne null} ? @{/upload/} + ${vo.sysPhoto} : @{/upload/} + null.png"
+                class="imagePreview">
+        </div>
+        <input type="file" name="attFile" class="attFile" hidden>
+        <div class="company">
+            <span>회&ensp;사&ensp;명</span>
+            <input type="text" name="comName" class="comName" value="잇다" th:value="${vo.comName}" readonly>
+            <br>
+            <span>사&emsp;&emsp;번</span>
+            <input type="text" name="employeeNumber" class="employeeNumber" th:value="${vo.employeeNumber}" readonly>
+            <br>
+            <span>입&ensp;사&ensp;일</span>
+            <input type="date" name="joinCompany" class="joinCompany" th:value="${vo.joinCompany}">
+            <br>
+            <span>직&emsp;&emsp;급</span>
+            <select name="tier" class="tier">
+                <option th:value="${vo.tier}">[[${vo.tierCode.tierName}]]</option>
+                <th:block th:each="n : ${tier}">
+                    <option th:if="${vo.tier ne n.tier}" th:value="${n.tier}">[[${n.tierName}]]</option>
+                </th:block>
+            </select>
+            <br>
+            <span>부&emsp;&emsp;서</span>
+            <span class="departC">
+                <label>
+                    <select name="departCode" class="departCode">
+                        <option th:value="${vo.departCode}">[[${vo.department.departName}]]</option>
+                        <th:block th:each="n : ${department}">
+                            <option th:if="${n.departCode ne 'departAll' and vo.departCode ne n.departCode}"
+                                th:value="${n.departCode}">[[${n.departName}]]</option>
+                        </th:block>
+                    </select>
+                </label>
+            </span>
+            <span class="teamC">
+                <label>
+                    <select name="teamCode" class="teamCode">
+                        <option th:value="${vo.teamCode}">[[${vo.team.teamName}]]</option>
+                        <th:block th:each="n : ${team}">
+                            <option th:if="${n.teamCode ne 'teamAll' and vo.teamCode ne n.teamCode}" th:value="${n.teamCode}">
+                                [[${n.teamName}]]</option>
+                        </th:block>
+                    </select>
+                </label>
+            </span>
+            <br>
+            <span>사내번호</span>
+            <input type="text" name="tel" class="tel" th:value="${vo.tel}">
+            <input type="hidden" name="dirNumber" class="dirNumber" th:value="${vo.dirNumber}">
+        </div>
+        <div class="pv" name="pv">
+            <span>아&ensp;이&ensp;디</span>
+            <input type="text" name="id" class="id" th:value="${vo.id}">
+            <br>
+            <span>패스워드</span>
+            <input type="text" name="pwd" class="pwd" th:value="${vo.pwd}">
+            <br>
+            <span>성&emsp;&emsp;명</span>
+            <input type="text" name="name" class="name" th:value="${vo.Name}">
+            <br>
+            <span>생년월일</span>
+            <input type="date" name="birthday" class="birthday" th:value="${vo.birthday}">
+            <br>
+            <span>연&ensp;락&ensp;처</span>
+            <input type="text" name="phone" class="phone" th:value="${vo.phone}">
+            <br>
+            <span>이&ensp;메&ensp;일</span>
+            <input type="text" name="email" class="email" th:value="${vo.email}">
+            <br>
+            <span>우편번호</span>
+            <input type="text" size="5" name="zipcode" class="zipcode" th:value="${vo.zipcode}">
+            <button type="button" class="btnZipcode">우편번호검색</button>
+            <br>
+            <span>주&emsp;&emsp;소</span>
+            <input type="text" name="address1" class="address1" th:value="${vo.address1}">
+            <br>
+            <span>상세주소</span>
+            <input type="text" name="address2" class="address2" th:value="${vo.address2}">
+        </div>
+        <div class="btnZone">
+            <button type="button" name="btnList" class="btnList">목록으로</button>
+            <button type="button" name="btnModifyR" class="btnModifyR">수정</button>
+        </div>
+        <input type="hidden" name="sno" th:value="${vo.sno}">
+        <input type="hidden" name="nowPage" th:value="${page.nowPage}">
+    </form>
+</body>
+
+</html>

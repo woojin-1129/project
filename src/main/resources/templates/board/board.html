@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>잇다</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous">
+        </script>
+    <!--<link rel="stylesheet" href="/css/list2.css">-->
+    <script defer src="/js/board.js"></script>
+    <link rel="stylesheet" href="/css/board.css">
+    <link rel="stylesheet" th:if="${session.admin ne null}" href="/css/boardIF.css">
+</head>
+
+<body>
+    <form class="feedFrm" name="feedFrm">
+        <div class="main">
+            <div class="top">
+                <div class="ttop">
+                    <div class="topName" th:text="${feedName}"></div>
+                    <div th:if="${feedName != '사내 게시판'}"
+                        th:class="${joinCode.toLowerCase().contains('all')} ? 'feedListBtn' : 'findFeedList'"> > </div>
+                    <div class="FeedListName" th:text="${feedList}"></div>
+                    <input type="hidden" name="joinCode" class="joinCode" th:value="${joinCode}">
+                    <input type="hidden" name="code" class="code" th:value="${code}">
+                    <input type="hidden" name="feedName" class="feedName" th:value="${feedName}">
+                    <input type="hidden" name="employeeNumber" class="loginNumber" th:value="${session.employeeNumber}"
+                        ><!-- class="employeeNumber"였던것인듯?-->
+                </div>
+                <div class="topR">
+                    <img src="/upload/find.png" class="magnifier">
+                </div>
+            </div>
+            <div class="list">
+                <div class="feed" th:each="v:${list}">
+                    <input type="text" name="sno" class="feedSno" th:value="${v.sno}" hidden></output>
+                    <div class="date"
+                        th:if="${vStat.index == vStat.size-1 || vStat.index != vStat.size-1 && v.creDay != list[(vStat.index+1)].creDay}"
+                        th:text="${v.creDay}"></div>
+
+                    <div class="feedList">
+                        <div class="left">
+                            <img th:src="${v.employees.sysPhoto ne null} ? @{/upload/}+${v.employees.sysPhoto} : '/upload/null.png'"
+                                class="photo" width="50px" height="50px" loading="lazy"><!--깜박임방법2(실패)-->
+                        </div>
+                        <div class="senter">
+                            <output class="name"
+                                th:text="${v.employees.team.teamName ne ' ' ? v.employees.team.teamName + ') ' + v.employees.name + ' ' + v.employees.tierCode.tierName :  v.employees.name + ' ' + v.employees.tierCode.tierName}"></output>
+                            <div th:class="${session.employeeNumber != v.employeeNumber} ? 'docZoon' : 'docMyZoon'">
+                                <output class="doc" th:utext="${v.doc}">아! 집에 가고싶당...</output>
+                                <div th:if="${session.employeeNumber == v.employeeNumber or session.admin ne null}" class="feedDeleteBtn"
+                                    th:attr="data-sno=${v.sno}" onclick="feedDelete(this.getAttribute('data-sno'))">x
+                                </div>
+                                <div th:if="${session.employeeNumber != v.employees.employeeNumber}" class="feedReplBtn"
+                                    th:attr="data-name=${v.employees.name},data-doc=${v.doc},data-tier=${v.employees.tierCode.tierName}"
+                                    onclick="feedRepl(this.getAttribute('data-name'),this.getAttribute('data-doc'),this.getAttribute('data-tier'))">
+                                    <img class="repl" src="/upload/Repl.png">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <output class="time" th:text="${v.creTime}">16:44</output>
+                        </div>
+                    </div>
+                    <div class="fileMain">
+                        <div class="fileList" th:each="att:${attFile}" th:if="${att.pSno == v.sno}">
+                            <div class="fileLists">
+                                <span class="sysFileName" th:text="${att.sysFile}" hidden></span>
+                                <span class="oriFileName" th:text="${att.oriFile}"></span>
+                                <span class="feedDownBtn">
+                                    <img class="feedDownloadBtn" src="/upload/download.png">
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="fileZoon">
+                <input type="file" name="attFile" class="feedFile" multiple hidden>
+                <div class="fileBtn">
+                    <img src="/upload/upload.png" class="upload">
+                </div>
+                <div class="fileCount">파일 업로드</div>
+                <div class="fileChoiceList" hidden></div>
+            </div>
+            <div class="btnZoon">
+                <textarea name="doc" id="feedDoc"></textarea>
+                <button type="button" id="btnFeedInsert">전송</button>
+            </div>
+        </div>
+    </form>
+</body>
+
+</html>

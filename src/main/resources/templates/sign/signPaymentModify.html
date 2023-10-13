@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>잇다</title>
+    <link rel="stylesheet" href="/css/sign/signPayment.css">
+    <script src="/js/sign.js"></script>
+</head>
+
+<body>
+    <form name="frm" class="frm">
+            <div class="paymentTitle">
+                <h1>지 출 결 의 서</h1>
+            </div>
+            <div class="pay">
+                <span>￦</span>
+                <input type="number" name="totAmount" class="totAmount" th:value="${vo.spVo.totAmount}" readonly>
+            </div>
+            <div class="payDate">
+                <span class="payDateText">기안</span>
+                <input type="date" name="initiativeDate" class="initiativeDate" th:value="${vo.spVo.initiativeDate}">
+
+                <span class="payDateText">결제</span>
+                <input type="date" name="PaymentDate" class="PaymentDate" th:value="${vo.spVo.paymentDate}">
+
+                <span class="payDateText">지출</span>
+                <input type="date" name="expenditure" class="expenditure" th:value="${vo.spVo.expenditure}">
+            </div>
+            <div class="history">내역</div>
+            <div class="docTitle">
+                <span class="briefsTitle">적요</span>
+                <span class="amountTitle">금액</span>
+                <span class="noteTitle">비고</span>
+            </div>
+            <div class="doc">
+                <th:black th:each="n : ${vo.spvVo}">
+                    <input type="text" name="briefs" class="briefs" th:value="${n.briefs}" autocomplete="off">
+                    <input type="number" name="amount" class="amount" th:value="${n.amount}" oninput="compute()" autocomplete="off">
+                    <input type="text" name="note" class="note" th:value="${n.note}" autocomplete="off">
+                </th:black>
+            </div>
+        <div class="btnZone">
+            <button type="button" class="btnModifyR">수정</button>
+            <span>&emsp;</span>
+            <button type="button" class="btnSignHome">취소</button>
+        </div>
+        <input type="hidden" name="nowPage" class="nowPage" th:value="${page.nowPage}">
+        <input type="hidden" name="findStr" class="findStr" th:value="${page.findStr}">
+        <input type="hidden" name="kind" class="kind" th:value="${kind}">
+        <input type="hidden" name="pSno" class="pSno" th:value="${vo.spVo.pSno}">
+    </form>
+</body>
+
+</html>

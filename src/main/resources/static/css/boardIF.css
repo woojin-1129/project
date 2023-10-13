@@ -1,0 +1,25 @@
+.feedDeleteBtn {
+    position: absolute;
+    /* 절대 위치로 설정 */
+    top: -1px;
+    /* 위쪽 여백을 0으로 조절 */
+    right: -20px;
+    /* 오른쪽 여백을 0으로 조절 */
+    margin-right: 8px;
+    cursor: pointer;
+    /* 커서를 포인터로 변경해서 클릭 가능한 모양으로 변경 */
+    /*color: rgb(131, 25, 25);*/
+}
+
+.feedReplBtn {
+    position: absolute;
+    /* 절대 위치로 설정 */
+    top: 0;
+    /* 위쪽 여백을 0으로 조절 */
+    right: 0;
+    /* 오른쪽 여백을 0으로 조절 */
+    margin-right: 8px;
+    cursor: pointer;
+    /* 커서를 포인터로 변경해서 클릭 가능한 모양으로 변경 */
+    /*color: rgb(131, 25, 25);*/
+}

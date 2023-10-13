@@ -1,0 +1,257 @@
+#note-main {
+	margin: 100px auto;
+	width: 1200px;
+	text-align: center;
+}
+
+.form-check-input {
+	display: inline-block;
+}
+
+#btnSearch {
+	width: 65px;
+	cursor: pointer;
+	padding: 8px 16px;
+	border: none;
+	border-radius: 0px 4px 4px 0px;
+	background-color: #007bff;
+	color: #fff;
+	margin-left: -10px;
+}
+
+#btnDelete {
+	background-color: #fff;
+		color: #dc3545;
+		border: 1px solid #dc3545;
+}
+
+/* 검색존 */
+#findStr {
+	width: 300px;
+	margin-left: 830px;
+	border-radius: 4px 0px 0px 4px;
+}
+
+.note-frm {
+	margin-bottom: 20px;
+	margin-top: -80px;
+}
+
+/* 테이블 */
+.note-table {
+	display: table;
+	width: 100%;
+}
+
+.note-th {
+	font-size: larger;
+	color: #202020;
+	font-weight: bold;
+	display: table-header-group
+}
+
+.note-tr {
+	display: table-row;
+	height: 35px;
+}
+
+.note-tr .doc:hover {
+	cursor: pointer;
+	background-color: #acacac42;
+	border-radius: 10px;
+}
+
+.note-td {
+	font-size: large;
+	display: table-cell;
+	color: #202020;
+	border-bottom: 1px solid #5e5e5e5b;
+}
+
+.note-tbody {
+	display: table-row-group;
+}
+
+.note-tbody * {
+	font-size: 12pt;
+}
+
+.note-table .check {
+	width: 5%;
+}
+
+.note-table .sendEmployee {
+	width: 15%;
+}
+
+.note-table .position {
+	width: 5%;
+}
+
+.note-table .doc {
+	width: 50%;
+	max-width: 480px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.note-table .sendDate {
+	width: 15%;
+}
+
+.note-table .readDate {
+	width: 15%;
+}
+
+#flexCheckDefault {
+	width: 18px;
+}
+
+/* 버튼존 */
+#note-btnZone {
+	float: left;
+	margin-top: 20px;
+}
+
+/* 페이지존 */
+#pageZone {
+	display: inline-block;
+	margin-right: 80px;
+	margin-top: 20px;
+}
+
+.btnFirst,
+.btnPrev,
+.btnNext,
+.btnLast {
+	background-color: #f8f9fb;
+	border: none;
+	border-radius: 4px;
+	margin: -2px;
+	width: 25px;
+	height: 25px;
+	line-height: 21px;
+	font-size: 12pt;
+}
+
+.btnFirst:hover,
+.btnPrev:hover,
+.btnNext:hover,
+.btnLast:hover,
+.btnNum:hover {
+	background-color: rgb(222, 222, 255);
+}
+
+.btnNum {
+	background-color: #f8f9fb;
+	border: none;
+	font-weight: 600;
+	padding: 5px;
+	border-radius: 4px;
+	width: 25px;
+	height: 25px;
+	line-height: 0px;
+	margin: 2px;
+}
+
+.now {
+	background-color: rgb(177, 177, 255);
+	border: none;
+	font-weight: bolder;
+	padding: 5px;
+	border-radius: 4px;
+	width: 25px;
+	height: 25px;
+	line-height: 0px;
+
+	margin: 2px;
+}
+
+.bi-chevron-right,
+.bi-chevron-left {
+	transform: translate(-2px, 1.5px);
+	stroke: currentColor;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	stroke-width: 1.3;
+}
+
+.bi-chevron-bar-right,
+.bi-chevron-bar-left {
+	transform: translate(-2px, 2.5px);
+	stroke: currentColor;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	stroke-width: 1.3;
+}
+
+.ui-autocomplete {
+	z-index: 4000 !important;
+}
+
+/* 모달창 스타일지정 */
+.modal,
+.viewModal {
+	display: none;
+	position: fixed;
+	z-index: 1000;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Modal Content/Box */
+#viewModal .modal-content {
+	text-align: left;
+	z-index: 1000;
+	background-color: #fefefe;
+	margin: 10% auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 800px;
+	border-radius: 5px;
+}
+
+#myModal .modal-content {
+	text-align: left;
+	z-index: 1000;
+	background-color: #fefefe;
+	margin: 10% auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 800px;
+}
+
+.modal-footer {
+	justify-content: center;
+}
+
+.closeModal {
+	color: #aaa;
+	float: right;
+	font-size: 35px;
+	font-weight: bold;
+	position: absolute;
+	right: 15px;
+	top: -5px;
+}
+
+#btnReply {
+	margin-top: 10px;
+	margin-right: 10px;
+}
+
+.modal-footer .cancelView {
+	margin-top: 10px;
+}
+
+.closeModal:hover,
+.closeModal:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}

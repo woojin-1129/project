@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hrmView</title>
+    <link rel="stylesheet" href="/css/hrm/hrmView.css">
+    <script defer src="/js/hrm.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+</head>
+
+<body>
+    <main class="hrmView">
+        <form name="frmHrm" class="frmHrm" method="post">
+            <div class="photoZone">
+                <img th:src="${vo.sysPhoto ne null} ? @{/upload/} + ${vo.sysPhoto} : @{/upload/} + null.png" class="priPhoto">
+            </div>
+            <div class="company">
+                <span>회&ensp;사&ensp;명</span>
+                <input type="text" name="companyName" class="comName" th:value="${vo.comName}" readonly>
+                <br>
+                <span>사&emsp;&emsp;번</span>
+                <input type="text" name="employeeNumber" class="employeeNumber" th:value="${vo.employeeNumber}"
+                    readonly>
+                <br>
+                <span>입&ensp;사&ensp;일</span>
+                <input type="date" name="joinCompany" class="joinCompany" th:value="${vo.joinCompany}" readonly>
+                <br>
+                <span>직&emsp;&emsp;급</span>
+                <span class="tier" th:text="${vo.tierCode.tierName}"></span>
+                <div class="department">
+                    <span>부&emsp;&emsp;서</span>
+                    <span class="departName" th:text="${vo.department.departName ne null or vo.department.departName ne ''} ? ${vo.department.departName} : '&emsp;'"></span>
+                    <span class="teamName" th:text="${vo.team.teamName ne null or vo.team.teamName ne ''} ? ${vo.team.teamName} : '&emsp;'"></span>
+                </div>
+                <span>사내번호</span>
+                <input type="text" name="tel" class="tel" th:value="${vo.tel}" readonly>
+            </div>
+            <div class="pv" name="pv">
+                <span>아&ensp;이&ensp;디</span>
+                <input type="text" name="id" class="id" th:value="${vo.id}" readonly>
+                <br>
+                <span>패스워드</span>
+                <input type="text" name="pwd" class="pwd" th:value="${vo.pwd}" readonly>
+                <br>
+                <span>성&emsp;&emsp;명</span>
+                <input type="text" name="name" class="name" th:value="${vo.Name}" readonly>
+                <br>
+                <span>생년월일</span>
+                <input type="date" name="birthday" class="birthday" th:value="${vo.birthday}" readonly>
+                <br>
+                <span>연&ensp;락&ensp;처</span>
+                <input type="text" name="phone" class="phone" th:value="${vo.phone}" readonly>
+                <br>
+                <span>이&ensp;메&ensp;일</span>
+                <input type="text" name="email" class="email" th:value="${vo.email}" readonly>
+                <br>
+                <span>우편번호</span>
+                <input type="text" size="5" name="zipcode" class="zipcode" th:value="${vo.zipcode}" readonly>
+                <br>
+                <span>주&emsp;&emsp;소</span>
+                <input type="text" name="address1" class="address1" th:value="${vo.address1}" readonly>
+                <br>
+                <span>상세주소</span>
+                <input type="text" name="address2" class="address2" th:value="${vo.address2}" readonly>
+            </div>
+            <div class="btnZone">
+                <button type="button" name="btnList" class="btnList">목록으로</button>
+                <button type="button" name="btnModify" class="btnModify">수정하기</button>
+                <button type="button" name="btnDelete" class="btnDelete">삭제하기</button>
+            </div>
+            <input type="hidden" name="sno" th:value="${vo.sno}">
+            <input type="hidden" name="nowPage" th:value="${page.nowPage}">
+            <input type="hidden" name="findStr" hidden th:value="${page.findStr}">
+        </form>
+    </main>
+</body>
+
+</html>

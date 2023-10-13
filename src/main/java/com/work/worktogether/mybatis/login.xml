@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="login">
+    <select id="loginCheck" parameterType="EmployeesVo" resultType="EmployeesVo"> 
+        SELECT id , pwd , name , employeeNumber , sysPhoto , comName , departCode , teamCode FROM employees 
+        where id=#{id} and pwd=#{pwd} 
+    </select>
+
+    <select id="admin" parameterType="String" resultType="AdminVo">
+        select sno , employeeNumber from admin
+        where employeeNumber = #{_parameter}
+    </select>
+   
+</mapper>

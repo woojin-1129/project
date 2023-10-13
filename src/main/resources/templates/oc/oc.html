@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>organizationChart</title>
+    <link rel="stylesheet" href="/css/oc.css">
+    <script defer src="/js/oc.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+</head>
+
+<body>
+    <main id="ocMain">
+        <form name="frmOc" method="post">
+            <header class="ocHeader">
+                <input type="text" name="findStr" class="findStr" placeholder="부서 및 성명을 입력하시오." autocomplete="off">
+                <button type="button" class="btnFind">검색</button>
+            </header>
+            <section class="ocViewer">
+                <div class="infoTep">*정보 탭을 클릭 시 세부정보 탭이 열립니다.</div>
+                <!-- 부서별로 순회 -->
+                <div class="partition">
+                <div th:each="v : ${ocList}">
+                        <div class="partName">
+                            <span class="part" th:text="${v.departName}"></span>
+                        </div>
+                        <div class="resultZone">
+                            <!-- 해당 부서에 속한 직원들을 순회 -->
+                            <div class="result" th:each="employee : ${v.employees}">
+                                <div class="image">
+                                    <img th:src="${employee.sysPhoto eq null or employee.sysPhoto eq ''} ? @{/upload/} + null.png : @{/upload/}+${employee.sysPhoto}" class="preview">
+                                </div>
+                                <div class="spanZone">
+                                    <span class="departName" th:text="${employee.department.departName}"></span>
+                                    <span class="teamName" th:text="${employee.team.teamName}"></span>
+                                    <br>
+                                    <span class="tierName" th:text="${employee.tierCode.tierName}"></span>
+                                    <span class="name" th:text="${employee.name}"></span>
+                                    <br>
+                                    <span>사번 : </span>
+                                    <span class="employeeNumber" th:text="${employee.employeeNumber}"></span>
+                                    <span class="joinCompany" th:text="${employee.joinCompany}" hidden></span>
+                                    <span class="email" th:text="${employee.email}" hidden></span>
+                                    <span class="tel" th:text="${employee.tel}" hidden></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </form>
+    </main>
+</body>
+
+</html>

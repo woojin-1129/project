@@ -1,0 +1,211 @@
+.frm {
+    width: 700px;
+    height: 718px;
+    margin: 30px auto;
+}
+
+.top {
+    height: 100px;
+    border-left: 2px solid black;
+}
+
+.top>.topText {
+    padding-top: 20px;
+    text-align: center;
+    vertical-align: top;
+    width: 36px;
+    height: 100%;
+    display: inline-block;
+    border-top: 2px solid black;
+    border-right: 2px solid black;
+}
+
+.signBox {
+    margin-left: -6px;
+    width: 115px;
+    height: 100%;
+    display: inline-block;
+    border-right: 2px solid black;
+    border-top: 2px solid black;
+}
+
+.signCk {
+    width: 100%;
+    text-align: center;
+    line-height: 80px;
+    height: 75%;
+    border-bottom: 2px solid black;
+}
+
+.signName {
+    width: 100%;
+    text-align: center;
+}
+
+.bottom {
+    position: relative;
+    width: 700px;
+    height: 620px;
+    border: 2px solid black;
+}
+
+.iniName {
+    position: absolute;
+    right: 0;
+    top: -25px;
+}
+
+.bottom>.bottomTitle {
+    margin: 0px auto;
+    width: 250px;
+    height: 50px;
+    text-align: center;
+    border-bottom: 6px double black;
+}
+
+.vacationDate {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    text-align: center;
+}
+
+.vacationDateText {
+    margin-top: 10px;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    border-top: 2px solid black;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.startDate,
+.endDate {
+    width: 150px;
+    font-size: 14pt;
+}
+
+.history {
+    text-align: center;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    border-bottom: 2px solid black;
+}
+
+.docZone {
+    position: relative;
+    width: 100%;
+    height: 425px;
+    padding: 10px;
+}
+
+.doc {
+    position: absolute;
+    font-size: 14pt;
+    width: 97%;
+    height: 96%;
+    resize: none;
+    word-wrap: break-word;
+    outline: none;
+}
+
+.signBtnZone {
+    margin-top: 20px;
+    text-align: center;
+}
+.signBtnZone .btnCk,
+.signBtnZone .btnRejection,
+.signBtnZone .btnSignHome,
+.signBtnZone .btnModify,
+.signBtnZone .btnDelete,
+.signBtnZone .btnSubmit {
+    margin-top: 20px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.btnSignHome {
+    background-color: #fff;
+        border: 1px solid #555;
+        color: #555;
+}
+
+.signBtnZone .btnCk,
+.signBtnZone .btnSubmit {
+        background-color: #007bff;
+            border: none;
+            color: #fff;
+}
+
+.signBtnZone .btnRejection,
+.signBtnZone .btnDelete {
+    background-color: #fff;
+        color: #dc3545;
+        border: 1px solid #dc3545;
+}
+
+.signBtnZone .btnModify {
+        background-color: #fff;
+            border: 1px solid rgb(60, 168, 60);
+            color: rgb(60, 168, 60);
+}
+
+.rejectionModal {
+    position: absolute;
+    z-index: 99999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(146, 146, 146, 0.3)
+}
+
+.rejectionComment {
+    position: absolute;
+    left: 40%;
+    top: 30%;
+    width: 500px;
+    height: 350px;
+    background-color: white;
+    border-radius: 10px;
+
+    padding: 10px;
+}
+
+.rejection {
+    width: 100%;
+    height: 200px;
+    resize: none;
+    word-wrap: break-word;
+    font-size: 14pt;
+}
+
+.modalBtnZone {
+    margin-top: 15px;
+    text-align: center;
+}
+.rejectionComment .btnRejectionR ,
+.rejectionComment .btnModalDelete {
+    width: 100px;
+        height: 30px;
+        border-radius: 4px;
+}
+
+.rejectionComment .btnRejectionR {
+        background-color: #fff;
+            color: #dc3545;
+            border: 1px solid #dc3545;
+}
+
+.rejectionComment .btnModalDelete {
+    background-color: #fff;
+        border: 1px solid #555;
+        color: #555;
+}

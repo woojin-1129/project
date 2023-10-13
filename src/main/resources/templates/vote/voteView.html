@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+	<script defer src="/js/vote.js"></script>
+	<link rel="stylesheet" href="/css/vote/voteView.css" />
+	<title>Document</title>
+</head>
+
+<body>
+	<form name="frmVoteView" class="frmVoteView">
+		<div class="voteViewQuestion">
+			<span th:text="${vo.title}"></span>
+		</div>
+		<span class="employeesName" th:text="${vo.employees.name}"></span>
+		<div class="viewSelectDoc">
+			<div th:if="${vo.typeValue eq 'single'}">
+				<th:block th:each="v : ${vo.voteSelect}">
+					<label><input type="radio" name="selectDoc" th:value="${v.selectDoc}">[[${v.selectDoc}]]</label>
+					<br>
+				</th:block>
+			</div>
+			<div th:if="${vo.typeValue eq 'multi'}">
+				<th:block th:each="v : ${vo.voteSelect}">
+					<label><input type="checkbox" name="selectDoc" th:value="${v.selectDoc}">[[${v.selectDoc}]]</label>
+					<br>
+				</th:block>
+			</div>
+		</div>
+		<input type="hidden" name="sno" th:value="${vo.sno}">
+		<input type="hidden" name="typeValue" th:value="${vo.typeValue}">
+		<br>
+		<div class="btnZone">
+			<button type="button" class="btnVoteResult">투표</button>
+			<button type="button" class="btnVoteDelete" th:if="${vo.employeeNumber eq session.employeeNumber}">삭제</button>
+		</div>
+		<button type="button" class="btnVoteList">목록으로</button>
+	</form>
+</body>
+
+</html>

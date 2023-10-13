@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>잇다</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous">
+        </script>
+    <link rel="stylesheet" href="/css/sign/sign.css">
+    <script defer src="/js/sign.js"></script>
+</head>
+
+<body>
+    <div class="signView">
+        <h3>&nbsp;</h3>
+        <div class="searchZone">
+            <input type="text" class="findStr" name="findStr" th:value="${page.findStr}" autocomplete="off"
+                placeholder="검색어를 입력하세요">
+            <button type="button" class="btnFind">검색</button>
+            <input type="hidden" th:value="${page.nowPage}" name="nowPage" class="nowPage">
+        </div>
+        <div class="signTitle">
+            <span class="snoTitle">문서번호</span>
+            <span class="kindTitle">문서종류</span>
+            <span class="employTitle">기안자</span>
+            <span class="creDateTitle">기안일자</span>
+            <span class="finalDateTitle">최종결재일자</span>
+            <span class="statusTitle">상태</span>
+        </div>
+        <div class="result">
+            <div class="list" th:each="n : ${list}">
+                <th:black th:class="listA" th:onclick="signView([[${n.sno}]] , [[${n.employees.name}]] , [[${n.kind}]])">
+                    <span class="sno" th:text="${n.sno}"></span>
+                    <span class="kind" th:text="${n.kind}"></span>
+                    <span class="employ" th:text="${n.employees.name}"></span>
+                    <span class="creDate" th:text="${n.creDate}"></span>
+                    <span class="finalDate" th:text="${n.finalDate}"></span>
+                </th:black>
+                <input type="hidden" th:class="|rejection${n.sno}|" th:value="${n.rejection}">
+                <span th:class="|a${n.sno}|" id="status"></span>
+                <span class="statusRejection" th:if="${n.status eq '반려'}"
+                    th:onclick="rejectionDoc([[${n.sno}]])">반려</span>
+                <span class="status" th:if="${n.status eq '대기'}">대기</span>
+                <span class="status" th:if="${n.status eq '임시저장'}">임시저장</span>
+                <span class="statusApproval" th:if="${n.status eq '승인'}">승인</span>
+            </div>
+        </div>
+
+        <button type="button" class="btnSignRegister">작성</button>
+
+        <div class="btnZone">
+        
+            <th:block th:if="${page.startPage gt 1}">
+        
+                <button type="button" class="btnFirst" onclick="move(1)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" fill="none" class="bi bi-chevron-bar-left"
+                        viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M11.854 3.646a.5.5 0 0 1 0 .708L8.207 8l3.647 3.646a.5.5 0 0 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 0 1 .708 0zM4.5 1a.5.5 0 0 0-.5.5v13a.5.5 0 0 0 1 0v-13a.5.5 0 0 0-.5-.5z" />
+                    </svg>
+                </button>
+        
+                <button type="button" class="btnPrev" th:value="${page.startPage-1}" onclick="move(this.value)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="13" fill="none" class="bi bi-chevron-left"
+                        viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+                    </svg>
+                </button>
+        
+            </th:block>
+        
+            <th:block th:each="n : ${#numbers.sequence(page.startPage, page.endPage,1)}">
+                <button type="button" class="btnNum" th:class="${page.nowPage eq n ? 'now' : 'btnNum'}" th:text="${n}"
+                    th:value="${n}" onclick="move(this.value)"></button>
+            </th:block>
+        
+            <th:block th:if="${page.endPage lt page.totPage}">
+        
+                <button type="button" class="btnNext" th:value="${page.endPage+1}" onclick="move(this.value)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="13" fill="none" class="bi bi-chevron-right"
+                        viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+                    </svg>
+                </button>
+        
+                <button type="button" class="btnLast" th:value="${page.totPage}" onclick="move(this.value)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" fill="none" class="bi bi-chevron-bar-right"
+                        viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M4.146 3.646a.5.5 0 0 0 0 .708L7.793 8l-3.647 3.646a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708 0zM11.5 1a.5.5 0 0 1 .5.5v13a.5.5 0 0 1-1 0v-13a.5.5 0 0 1 .5-.5z" />
+                    </svg>
+                </button>
+        
+            </th:block>
+        </div>
+    </div>
+</body>
+
+</html>

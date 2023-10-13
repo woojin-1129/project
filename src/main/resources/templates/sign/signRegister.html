@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>잇다</title>
+    <script defer src="/js/sign.js"></script>
+    <link rel="stylesheet" href="/css/sign/signRegister.css">
+</head>
+<body>
+    <div class="signRegister">
+        <div class="signRegisterTitle">
+            <h3>전자결재</h3>
+            <select name="signForm" class="signForm">
+                <option>--양식을 선택하세요--</option>
+                <option value="지출결의서">지출결의서</option>
+                <option value="휴가계획서">휴가계획서</option>
+            </select>
+            <input type="hidden" name="nowPage" th:value="${page.nowPage}" class="nowPage">
+            <input type="hidden" name="findStr" th:value="${page.findStr}" class="findStr">
+        </div>
+        <div class="form"></div>
+        <div class="RegisterBtnZone">
+            <button type="button" class="btnRegisterR">작성</button>
+            <button type="button" class="btnRegisterTemp">임시작성</button>
+            <button type="button" class="btnSignHome">취소</button>
+        </div>
+    </div>
+</body>
+</html>

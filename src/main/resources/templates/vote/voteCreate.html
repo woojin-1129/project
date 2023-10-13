@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script defer src="/js/vote.js"></script>
+  <link rel="stylesheet" href="/css/vote/voteCreate.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>투표 추가</h1>
+  <form name="frmVoteCreate" class="frmVoteCreate">
+    <div class="questionContainner">
+      <input type="text" name="title" class="title" placeholder="질문을 여기에 작성해주세요..." />
+    </div>
+    <div class="typeContainner">
+      <label>
+        <input type="radio" name="typeValue" value="single" class="typeValue" />하나만 선택
+      </label>
+      <label>
+        <input type="radio" name="typeValue" value="multi" class="typeValue" />중복선택 가능
+      </label>
+    </div>
+    <div class="dateContainner">
+      <span>종료일자</span>
+      <input type="datetime-local" name="endDate" class="endDate" />
+    </div>
+    <div class="selectionContainner">
+      <input type="text" name="selectDoc" class="selectDoc" placeholder="1.선택지 내용을 입력해주세요..." />
+    </div>
+    <div>
+      <button type="button" class="btnMinus">-선택지 삭제</button>
+      <button type="button" class="btnPlus">+선택지 추가</button>
+    </div>
+    <br>
+    <button type="button" class="btnCancel">취소</button>
+    <button type="button" class="btnVoteSubmmit">등록</button>
+  </form>
+</body>
+
+</html>

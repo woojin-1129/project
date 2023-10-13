@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>잇다</title>
+    <link rel="stylesheet" href="/css/sign/signPaymentView.css">
+    <script src="/js/sign.js"></script>
+</head>
+
+<body>
+    <input type="hidden" name="nowPage" class="nowPage" th:value="${page.nowPage}">
+    <input type="hidden" name="findStr" class="findStr" th:value="${page.findStr}">
+    <input type="hidden" name="sno" class="sno" th:value="${vo.sVo.sno}">
+    <input type="hidden" name="kind" class="kind" th:value="${vo.sVo.kind}">
+
+    <input type="hidden" class="sessionNumber" th:value="${session.employeeNumber}">
+
+        <input type="hidden" name="plus" th:value="${vo.sVo.employeeNumber}">
+    <div th:each="n : ${vo.sdVo}">
+        <input type="hidden" name="plus" th:value="${n.employeeNumber}">
+    </div>
+    <div class="frm">
+        <div class="top">
+
+            <div class="topText">
+                <div>결</div>
+                <br>
+                <div>재</div>
+            </div>
+            <div class="signBox" th:each="n : ${vo.sdVo}">
+                <div class="signCk" th:text="${n.empChecked}"></div>
+                <div class="signName" th:text="${n.employees.tierCode.tierName}"></div>
+            </div>
+
+        </div>
+        <div class="bottom">
+            <span class="iniName" th:text="|기안자 : ${name}|"></span>
+            <div class="bottomTitle">
+                <h1>지 출 결 의 서</h1>
+            </div>
+            <div class="pay">
+                <span>￦</span>
+                <span class="totAmount" th:text="${#numbers.formatInteger(vo.spVo.totAmount, 3, 'COMMA')}"></span>
+            </div>
+            <div class="payDate">
+                <span class="payDateText">기안</span>
+                <span class="initiativeDate" th:text="${vo.spVo.initiativeDate}"></span>
+
+                <span class="payDateText">결제</span>
+                <span class="PaymentDate" th:text="${vo.spVo.PaymentDate}"></span>
+
+                <span class="payDateText">지출</span>
+                <span class="expenditure" th:text="${vo.spVo.expenditure}"></span>
+            </div>
+            <div class="history">내역</div>
+            <div class="docTitle">
+                <span class="briefsTitle">적요</span>
+                <span class="amountTitle">금액</span>
+                <span class="noteTitle">비고</span>
+            </div>
+            <div class="doc">
+                <th:black class="docList" th:each="n : ${vo.spvVo}">
+                    <div class="briefs" th:utext="${n.note eq '' ? '&nbsp;' : n.briefs}"></div>
+                    <div class="amount"
+                        th:text="${n.amount eq 0 ? '&nbsp;' : #numbers.formatInteger(n.amount, 3, 'COMMA')}"></div>
+                    <div class="note" th:utext="${n.note eq '' ? '&nbsp;' : n.note}"></div>
+                </th:black>
+            </div>
+        </div>
+        <div class="signBtnZone">
+            <th:black th:each="n : ${vo.sdVo}" th:if="${n.empChecked eq null and n.employeeNumber eq session.employeeNumber and vo.sVo.rejection eq null}">
+                <button type="button" class="btnCk">승인</button>
+                <span>&emsp;</span>
+                <button type="button" class="btnRejection">반려</button>
+                <span>&emsp;</span>
+            </th:black>
+            <th:black th:if="${session.employeeNumber eq vo.sVo.employeeNumber and vo.sVo.status eq '임시저장'}">
+                <button type="button" class="btnSubmit">제출</button>
+                <span>&emsp;</span>
+                <button type="button" class="btnModify">수정</button>
+                <span>&emsp;</span>
+                <button type="button" class="btnDelete">삭제</button>
+                <span>&emsp;</span>
+            </th:black>
+            <button type="button" class="btnSignHome">취소</button>
+        </div>
+    </div>
+</body>
+
+</html>

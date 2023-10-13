@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>잇다</title>
+    <link rel="stylesheet" href="/css/sign/signVacationView.css">
+    <script src="/js/sign.js"></script>
+</head>
+
+<body>
+    <input type="hidden" name="nowPage" class="nowPage" th:value="${page.nowPage}">
+    <input type="hidden" name="findStr" class="findStr" th:value="${page.findStr}">
+    <input type="hidden" name="sno" class="sno" th:value="${vo.sVo.sno}">
+    <input type="hidden" name="kind" class="kind" th:value="${vo.sVo.kind}">
+    
+    <input type="hidden" class="sessionNumber" th:value="${session.employeeNumber}">
+    
+    <input type="hidden" name="plus" th:value="${vo.sVo.employeeNumber}">
+    <div th:each="n : ${vo.sdVo}">
+        <input type="hidden" name="plus" th:value="${n.employeeNumber}">
+    </div>
+    <div class="frm">
+        <div class="top">
+
+            <div class="topText">
+                <div>결</div>
+                <br>
+                <div>재</div>
+            </div>
+            <div class="signBox" th:each="n : ${vo.sdVo}">
+                <div class="signCk" th:text="${n.empChecked}"></div>
+                <div class="signName" th:text="${n.employees.tierCode.tierName}"></div>
+            </div>
+            
+        </div>
+        <div class="bottom">
+            <span class="iniName" th:text="|기안자 : ${name}|"></span>
+            <div class="bottomTitle">
+                <h1>휴 가 계 획 서</h1>
+            </div>
+            <div class="vacationDateText">
+                <span>휴가기간</span>
+            </div>
+            <div class="vacationDate">
+                <span type="date" name="startDate" class="startDate" th:text="${vo.svVo.startDate}"></span>
+
+                <span>~</span>
+
+                <span type="date" name="endDate" class="endDate" th:text="${vo.svVo.endDate}"></span>
+            </div>
+            <div class="history">휴가계획서</div>
+            <div class="docZone">
+                <textarea name="doc" class="doc" th:text="${vo.svVo.doc}" readonly></textarea>
+            </div>
+        <div class="signBtnZone">
+            <th:black th:each="n : ${vo.sdVo}" th:if="${n.empChecked eq null and n.employeeNumber eq session.employeeNumber and vo.sVo.rejection eq null}">
+                <button type="button" class="btnCk">승인</button>
+                <span>&emsp;</span>
+                <button type="button" class="btnRejection">반려</button>
+                <span>&emsp;</span>
+            </th:black>
+            <th:black th:if="${session.employeeNumber eq vo.sVo.employeeNumber and vo.sVo.status eq '임시저장'}">
+                <button type="button" class="btnSubmit">제출</button>
+                <span>&emsp;</span>
+                <button type="button" class="btnModify">수정</button>
+                <span>&emsp;</span>
+                <button type="button" class="btnDelete">삭제</button>
+                <span>&emsp;</span>
+            </th:black>
+            <button type="button" class="btnSignHome">취소</button>
+        </div>
+        </div>
+    </div>
+</body>
+
+</html>

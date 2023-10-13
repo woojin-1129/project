@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>보낸 쪽지함</title>
+  <!-- 쪽지 css -->
+  <link rel="stylesheet" href="css/note.css">
+  <!-- 제이쿼리 자동완성 css -->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+  <script defer src="/js/send_note.js"></script>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+
+<body>
+  <main id="note-main">
+    <form class="d-flex note-frm" role="search" id="note-search" name="frm">
+      <input class="form-control me-2 note-search" name="findStr" id="findStr" type="search" placeholder="이름,내용,직급"
+        aria-label="Search" th:value="${page.findStr}">
+      <button class="btn btn-outline-success" id="btnSearch" type="button">검색</button>
+      <input th:value="${page.nowPage}" type="hidden" name="nowPage" />
+      <input th:value="${session.employeeNumber}" type="hidden" name="sendEmployee">
+    </form>
+
+
+    <div class="note-table">
+
+      <div class="note-th">
+        <div class="note-tr">
+          <div class="note-td check">
+            <input class="form-check-input checkAll" type="checkbox" id="flexCheckDefault">
+          </div>
+          <div class="note-td sendEmployee">받는사람</div>
+          <div class="note-td position">직급</div>
+          <div class="note-td doc">내용</div>
+          <div class="note-td sendDate">날짜</div>
+          <div class="note-td readDate">상태</div>
+        </div>
+      </div>
+
+      <div class="note-tbody">
+        <div class="note-tr" th:each="vo:${list}">
+          <div class="note-td check">
+            <input class="form-check-input" name="check" type="checkbox">
+            <input type="hidden" class="divSno" th:value="${vo.sno}" />
+          </div>
+          <div class="note-td sendEmployee" th:text="${vo.name}"></div>
+          <div class="note-td position" th:text="${vo.tierName}"></div>
+          <div class="note-td doc btnView" th:text="${vo.doc}" th:onclick="view([[${vo.sno}]])"></div>
+          <div class="note-td sendDate" th:text="${vo.sendDate}"></div>
+          <div class="note-td readDate" th:text="${vo.readDate != null ? '읽음' : '안읽음'}">읽음</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="pageZone">
+
+          <th:block th:if="${page.startPage gt 1}">
+          
+            <button type="button" class="btnFirst" onclick="move(1)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" fill="none" class="bi bi-chevron-bar-left"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                  d="M11.854 3.646a.5.5 0 0 1 0 .708L8.207 8l3.647 3.646a.5.5 0 0 1-.708.708l-4-4a.5.5 0 0 1 0-.708l4-4a.5.5 0 0 1 .708 0zM4.5 1a.5.5 0 0 0-.5.5v13a.5.5 0 0 0 1 0v-13a.5.5 0 0 0-.5-.5z" />
+              </svg>
+            </button>
+          
+            <button type="button" class="btnPrev" th:value="${page.startPage-1}" onclick="move(this.value)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="13" fill="none" class="bi bi-chevron-left"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                  d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z" />
+              </svg>
+            </button>
+          
+          </th:block>
+          
+          <th:block th:each="n : ${#numbers.sequence(page.startPage, page.endPage,1)}">
+            <button type="button" class="btnNum" th:class="${page.nowPage eq n ? 'now' : 'btnNum'}" th:text="${n}" th:value="${n}"
+              onclick="move(this.value)"></button>
+          </th:block>
+          
+          <th:block th:if="${page.endPage lt page.totPage}">
+          
+            <button type="button" class="btnNext" th:value="${page.endPage+1}" onclick="move(this.value)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="13" fill="none" class="bi bi-chevron-right"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                  d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" />
+              </svg>
+            </button>
+          
+            <button type="button" class="btnLast" th:value="${page.totPage}" onclick="move(this.value)">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" fill="none" class="bi bi-chevron-bar-right"
+                viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                  d="M4.146 3.646a.5.5 0 0 0 0 .708L7.793 8l-3.647 3.646a.5.5 0 0 0 .708.708l4-4a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708 0zM11.5 1a.5.5 0 0 1 .5.5v13a.5.5 0 0 1-1 0v-13a.5.5 0 0 1 .5-.5z" />
+              </svg>
+            </button>
+          
+          </th:block>
+
+    </div>
+
+    <div id="note-btnZone">
+      <button type="button" class="btn btn-primary" id="btnWrite">쪽지쓰기</button>
+      <button type="button" class="btn btn-danger" id="btnDelete">삭제하기</button>
+    </div>
+
+  </main>
+
+
+  <!-- VIEW 모달 -->
+  <div id="viewModal" class="viewModal">
+    <div class="modal-content">
+      <span class="closeModal">&times;</span>
+      <h1 class="modal-title fs-5" id="exampleModalLabel">상세보기</h1>
+      <!-- hidden 사원정보 -->
+      <input type="hidden" id="getEmployee">
+      <label for="recipient-name" class="col-form-label">받는사람</label>
+      <input type="text" class="form-control" id="recipient-name1" readonly>
+      <label for="recipient-name" class="col-form-label">직급</label>
+      <input type="text" class="form-control" id="recipient-name2" readonly>
+      <label for="recipient-name" class="col-form-label">날짜</label>
+      <input type="text" class="form-control" id="recipient-name3" readonly>
+      <label for="message-text" class="col-form-label">내용</label>
+      <textarea class="form-control" id="message-text" rows="10" readonly></textarea>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="btnReply">쪽지쓰기</button>
+        <button type="button" class="btn btn-danger cancelView">취소</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- <input id="inputAutocomplete" type="text" class="form-control getEmployee" placeholder="이름,사번 검색"> -->
+  <!-- 쪽지쓰기버튼 -> 모달창 -->
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="closeModal">&times;</span>
+      <h1 class="modal-title fs-5" id="exampleModalLabel">쪽지 쓰기</h1>
+
+      <div class="mb-3">
+        <!-- hidden 사원정보 -->
+        <input type="hidden" id="note-sendEmployee" th:value="${session.employeeNumber}">
+        <label for="recipient-name4" class="col-form-label">받는사람</label>
+        <input id="inputAutocomplete" type="text" class="form-control getEmployee" placeholder="이름,사번 검색">
+
+      </div>
+
+      <div class="mb-3">
+        <label for="message-text2" class="col-form-label">내용</label>
+        <textarea class="form-control write-doc" id="message-text2" rows="10"></textarea>
+      </div>
+
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" id="btnSend">보내기</button>
+        <button type="button" class="btn btn-danger cancelNote">취소</button>
+      </div>
+
+    </div>
+  </div>
+</body>
+
+</html>

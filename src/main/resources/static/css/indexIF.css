@@ -1,0 +1,76 @@
+.menuZone .boardTitle,
+.menuZone .msgTitle,
+.menuZone .employeeManagementTitle {
+    line-height: 50px;
+    font-weight: 600;
+    background-color: #f8f9fb;
+    color: #444;
+    padding-left: 42px;
+    border-bottom: 1px solid #ccc;
+    position: relative;
+}
+
+.menuZone .notionBoard,
+.menuZone .boardMain,
+.menuZone .boardDepartment,
+.menuZone .boardTeam,
+.menuZone #index-btnSendNote,
+.menuZone .hrmView,
+.menuZone .attendance,
+.menuZone .bossZone {
+    padding-left: 25px;
+    font-size: 0.8em;
+    font-weight: 600;
+    margin-bottom: 4px;
+    height: 42px;
+    line-height: 42px;
+    font-size: 0.8em;
+    color: #666;
+    position: relative;
+    /* border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px; */
+}
+
+.menuZone #index-btnCalendar,
+.menuZone .votingBoard,
+.menuZone .sign,
+.menuZone .ocView {
+    font-size: 0.8em;
+    font-weight: 600;
+    margin-bottom: 4px;
+    height: 42px;
+    line-height: 42px;
+    font-size: 0.8em;
+    color: #666;
+    position: relative;
+    padding-left: 45px;
+}
+
+.menuZone .index-getNote {
+    font-size: 0.8em;
+    font-weight: 600;
+    margin-bottom: 4px;
+    height: 42px;
+    line-height: 42px;
+    color: #666;
+    padding-left: 43px;
+    width: 200px;
+    transform: translateX(-45px);
+    position: relative;
+}
+
+.plus {
+    border-bottom: none;
+}
+
+.menuZone .notionBoard,
+.menuZone .boardMain,
+.menuZone .boardDepartment,
+.menuZone .boardTeam,
+.menuZone #index-btnGetNote,
+.menuZone #index-btnSendNote,
+.menuZone .attendance,
+.menuZone .hrmView,
+.menuZone .bossZone {
+    padding-left: 44px;
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>잇다</title>
+    <link rel="stylesheet" href="/css/sign/signPayment.css">
+    <script defer src="/js/signTime.js"></script>
+</head>
+
+<body>
+    <form name="frm" class="frm">
+            <div class="paymentTitle">
+                <h1>지 출 결 의 서</h1>
+            </div>
+            <div class="pay">
+                <span>￦</span>
+                <input type="number" name="totAmount" class="totAmount" readonly>
+            </div>
+            <div class="payDate">
+                <span class="payDateText">기안</span>
+                <input type="date" name="initiativeDate" class="initiativeDate">
+
+                <span class="payDateText">결제</span>
+                <input type="date" name="PaymentDate" class="PaymentDate">
+
+                <span class="payDateText">지출</span>
+                <input type="date" name="expenditure" class="expenditure">
+            </div>
+            <div class="history">내역</div>
+            <div class="docTitle">
+                <span class="briefsTitle">적요</span>
+                <span class="amountTitle">금액</span>
+                <span class="noteTitle">비고</span>
+            </div>
+            <div class="doc">
+                <th:black th:each="n : ${#numbers.sequence(1, 13)}">
+                    <input type="text" name="briefs" class="briefs" autocomplete="off">
+                    <input type="number" name="amount" class="amount" value="0" oninput="compute()" autocomplete="off">
+                    <input type="text" name="note" class="note" autocomplete="off">
+                </th:black>
+            </div>
+    </form>
+</body>
+
+</html>

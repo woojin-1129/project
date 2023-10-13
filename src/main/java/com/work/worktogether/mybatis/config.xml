@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<configuration>
+
+  <typeAliases>
+    <typeAlias type="com.work.worktogether.vo.EmployeesVo" alias="EmployeesVo" />
+    <typeAlias type="com.work.worktogether.vo.TeamVo" alias="TeamVo" />
+    <typeAlias type="com.work.worktogether.vo.DepartmentVo" alias="DepartmentVo" />
+    <typeAlias type="com.work.worktogether.vo.TierCodeVo" alias="TierCodeVo" />
+    <typeAlias type="com.work.worktogether.vo.page.Page" alias="Page" />
+    <typeAlias type="com.work.worktogether.vo.page.PageCommute" alias="PageCommute" />
+
+    <typeAlias type="com.work.worktogether.vo.sign.SignVo" alias="SignVo" />
+    <typeAlias type="com.work.worktogether.vo.sign.SignPayVo" alias="SignPayVo" />
+    <typeAlias type="com.work.worktogether.vo.sign.SignPayValueVo" alias="SignPayValueVo" />
+    <typeAlias type="com.work.worktogether.vo.sign.SpvVo" alias="SpvVo" />
+    <typeAlias type="com.work.worktogether.vo.sign.SignVacationVo" alias="SignVacationVo" />
+    <typeAlias type="com.work.worktogether.vo.sign.SignDocumentVo" alias="SignDocumentVo" />
+
+    <typeAlias type="com.work.worktogether.vo.AdminVo" alias="AdminVo" />
+    <typeAlias type="com.work.worktogether.vo.commute.CommuteVo" alias="CommuteVo" />
+    <typeAlias type="com.work.worktogether.vo.commute.CommuteCountVo" alias="CommuteCountVo" />
+
+    <typeAlias type="com.work.worktogether.vo.FileContentVo" alias="FileContentVo" />
+    <typeAlias type="com.work.worktogether.vo.feed.FeedVo" alias="FeedVo" />
+    <typeAlias type="com.work.worktogether.vo.feed.FeedListVo" alias="FeedListVo" />
+
+    <typeAlias type="com.work.worktogether.vo.Room" alias="Room" />
+    <typeAlias type="com.work.worktogether.vo.ChatVo" alias="ChatVo" />
+
+    <typeAlias type="com.work.worktogether.vo.vote.VoteQuestion" alias="VoteQuestion" />
+    <typeAlias type="com.work.worktogether.vo.vote.VoteSelect" alias="VoteSelect" />
+    <typeAlias type="com.work.worktogether.vo.vote.VoteList" alias="VoteList" />
+
+    <typeAlias type="com.work.worktogether.vo.notion.NotionVo" alias="NotionVo" />
+    <typeAlias type="com.work.worktogether.vo.notion.NotionReplVo" alias="NotionReplVo" />
+
+    <typeAlias type="com.work.worktogether.vo.NoteVo" alias="NoteVo" />
+    <typeAlias type="com.work.worktogether.vo.CalendarVo" alias="CalendarVo" />
+
+    <typeAlias type="com.work.worktogether.vo.log.CommandVo" alias="CommandVo" />
+    <typeAlias type="com.work.worktogether.vo.log.LogVo" alias="LogVo" />
+  </typeAliases>
+
+
+  <environments default="development">
+    <environment id="development">
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url"
+          value="jdbc:mysql://localhost:3306/worktogether?allowMultiQueries=TRUE" />
+        <property name="username" value="M"/>
+        <property name="password" value="1111"/>
+      </dataSource>
+    </environment>
+  </environments>
+
+  <mappers>
+    <mapper resource="com/work/worktogether/mybatis/sign.xml" />
+    <mapper resource="com/work/worktogether/mybatis/login.xml" />
+    <mapper resource="com/work/worktogether/mybatis/profile.xml" />
+    <mapper resource="com/work/worktogether/mybatis/commute.xml" />
+    <mapper resource="com/work/worktogether/mybatis/feed.xml" />
+    <mapper resource="com/work/worktogether/mybatis/chat.xml" />
+    <mapper resource="com/work/worktogether/mybatis/hrm.xml" />
+    <mapper resource="com/work/worktogether/mybatis/vote.xml" />
+    <mapper resource="com/work/worktogether/mybatis/note.xml" />
+    <mapper resource="com/work/worktogether/mybatis/calendar.xml" />
+    <mapper resource="com/work/worktogether/mybatis/log.xml" />
+    <mapper resource="com/work/worktogether/mybatis/oc.xml" />
+    <mapper resource="com/work/worktogether/mybatis/notion.xml" />
+    <mapper resource="com/work/worktogether/mybatis/repl.xml" />
+    <mapper resource="com/work/worktogether/mybatis/vote.xml" />
+  </mappers>
+</configuration>

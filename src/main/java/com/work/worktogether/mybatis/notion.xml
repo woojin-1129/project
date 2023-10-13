@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="notion">
+
+<resultMap id="employeesMap" type="EmployeesVo" autoMapping="true"></resultMap>
+
+  <resultMap id="NotionMap" type="NotionVo" autoMapping="true">
+  <collection property="employees" resultMap="employeesMap"></collection>
+  </resultMap>
+
+<update id="hitUpdate" parameterType="Integer">
+  update notion set hit=hit+1 where sno = #{_parameter}
+</update>
+
+<select id="view" parameterType="Page" resultMap="NotionMap">
+  select n.sno , n.title , n.doc , n.creDate , n.modiDate , n.employeeNumber , e.name
+  from notion n 
+  join employees e on n.employeeNumber = e.employeeNumber 
+  where n.sno=#{_parameter}
+</select>
+
+<select id="attFiles" parameterType="Integer" resultType="FileContentVo">
+  select sno , pSno , oriFile , sysFile , code from FileContent where pSno=#{_parameter}
+</select>
+
+<select id="select" parameterType="Page" resultMap="NotionMap">
+  select n.sno,n.hit,n.doc,n.creDate, n.employeeNumber,getAttCnt(n.sno) as attCnt, n.title, e.name from notion n join employees e on n.employeeNumber = e.employeeNumber where n.title like '%${findStr}%'
+  or n.doc like '%${findStr}%' order by n.sno desc
+  limit #{startNo},#{listSize}
+</select>
+
+<select id="totSize" parameterType="Page" resultType="Integer">
+  select count(sno) totSize from notion where title like '%${findStr}%' or doc like '%${findStr}%'
+</select>
+
+<!--insert-->
+<insert id="register" parameterType="NotionVo">
+  insert into notion(sno,hit,creDate,employeeNumber,title,doc) values(#{sno},0,sysdate(),#{employeeNumber},#{title},#{doc})
+</insert>
+
+<insert id="attRegister" parameterType="FileContentVo">
+  insert into FileContent(pSno,oriFile,sysFile) values
+  <foreach collection="list" item="vo" separator=",">
+  (#{vo.pSno} , #{vo.oriFile} , #{vo.sysFile})
+  </foreach>
+</insert>
+
+<select id="getSerial" parameterType="String" resultType="Integer">
+  select getSerial(#{_parameter})
+</select>
+
+<delete id="delete" parameterType="Integer">
+  delete from notion where sno=#{_parameter}
+</delete>
+
+<delete id="replDelete" parameterType="Integer">
+  delete from notionRepl where notionSno = #{_paramter}
+</delete>
+
+<delete id="deleteAtt" parameterType="List">
+  delete from FileContent where sysFile in
+  <foreach collection="array" item="f" open="(" close=")" separator=','>
+      #{f}
+  </foreach>
+</delete>
+
+<update id="update" parameterType="NotionVo">
+  update notion set title=#{title}, doc=#{doc}, modiDate=#{modiDate} where sno=#{sno}
+</update>
+
+</mapper>

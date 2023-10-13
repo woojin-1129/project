@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="note">
+  <resultMap id="TierCodeMap" type="TierCodeVo" autoMapping="true"></resultMap>
+
+  <resultMap id="employeesMap" type="EmployeesVo" autoMapping="true">
+      <collection property="tierCode" resultMap="TierCodeMap"></collection>
+  </resultMap>
+
+  <!-- 모달창 - 자동완성 -->
+  <select id="autoCompleteList" parameterType="String" resultType="Map"> 
+    SELECT name,employeeNumber,tier 
+    FROM employees 
+    WHERE name LIKE '%${_parameter}%'
+  </select>
+
+  <!-- 보낸쪽지함 -->
+  <insert id="sendNote" parameterType="NoteVo"> 
+    INSERT INTO msg(sendEmployee,getEmployee,doc,sendDate) 
+    VALUES(#{sendEmployee},#{getEmployee},#{doc},now()) 
+  </insert>
+
+  <!-- 받은 쪽지목록 -->
+  <select id="selectAll" parameterType="Page" resultType="NoteVo">
+    SELECT DISTINCT m.sno, m.sendEmployee, m.getEmployee, m.doc, m.sendDate, m.readDate, t.tierName,e.name
+    FROM msg m
+    JOIN employees e ON m.sendEmployee = e.employeeNumber JOIN tiercode t ON e.tier = t.tier 
+    WHERE m.getEmployee = #{getEmployee}
+    AND (
+      e.name        LIKE '%${findStr}%'
+      or m.doc      LIKE '%${findStr}%'
+      or t.tierName LIKE '%${findStr}%'
+    )
+    ORDER BY sno DESC
+    LIMIT #{startNo},#{listSize}
+  </select>
+
+  <!-- 보낸 쪽지목록 -->
+  <select id="sendSelectAll" parameterType="Page" resultType="NoteVo">
+    SELECT DISTINCT m.sno, m.sendEmployee, m.getEmployee, m.doc, m.sendDate, m.readDate, t.tierName,e.name
+    FROM msg m
+    JOIN employees e ON m.getEmployee = e.employeeNumber JOIN tiercode t ON e.tier = t.tier 
+    WHERE m.sendEmployee = #{sendEmployee}
+    AND  (
+      e.name         LIKE '%${findStr}%'
+      or  m.doc      LIKE '%${findStr}%'
+      or  t.tierName LIKE '%${findStr}%'
+      )
+    ORDER BY sno DESC
+    LIMIT #{startNo},#{listSize}
+  </select>
+
+  <!-- 받은 쪽지함 페이징 -->
+  <select id="totSize" parameterType="Page" resultType="Integer">
+    SELECT count(m.sno) totSize
+    FROM msg m
+    JOIN employees e ON m.sendEmployee = e.employeeNumber JOIN tiercode t ON e.tier = t.tier 
+    WHERE m.getEmployee = #{getEmployee}
+    AND (e.name LIKE '%${findStr}%'
+    or m.doc LIKE '%${findStr}%'
+    or t.tierName LIKE '%${findStr}%')
+  </select>
+  
+
+  <!-- 보낸 쪽지함 페이징 -->
+  <select id="sendTotSize" parameterType="Page" resultType="Integer">
+    SELECT count(m.sno) totSize
+    FROM msg m
+    JOIN employees e ON m.getEmployee = e.employeeNumber JOIN tiercode t ON e.tier = t.tier 
+    WHERE m.sendEmployee = #{sendEmployee}
+    AND (e.name LIKE '%${findStr}%'
+    or m.doc LIKE '%${findStr}%'
+    or t.tierName LIKE '%${findStr}%')
+  </select>
+
+  <!-- 쪽지 삭제 -->
+  <delete id="deleteNotesBySno" parameterType="List">
+    DELETE FROM msg WHERE sno IN
+    <foreach item="item" collection="list" open="(" separator="," close=")">
+        #{item}
+    </foreach>
+  </delete>
+
+  <!-- 받은쪽지함 미리보기 -->
+  <select id="view" parameterType="Integer" resultType="NoteVo">
+    SELECT m.sno,m.sendEmployee,m.sendDate,m.doc,t.tierName,e.name,m.getEmployee
+    FROM msg m 
+    JOIN employees e ON m.sendEmployee = e.employeeNumber
+    JOIN tiercode t ON e.tier = t.tier 
+    WHERE m.sno = #{_parameter};
+  </select>
+
+  <!-- 보낸쪽지함 미리보기 -->
+  <select id="sendView" parameterType="Integer" resultType="NoteVo">
+    SELECT m.sno,m.getEmployee,m.sendDate,m.doc,t.tierName,e.name
+    FROM msg m 
+    JOIN employees e ON m.getEmployee = e.employeeNumber
+    JOIN tiercode t ON e.tier = t.tier 
+    WHERE m.sno = #{_parameter};
+  </select>
+  
+  <!-- 읽으면 read 데이터 추가 -->
+  <update id="read" parameterType="Integer">
+    UPDATE msg
+    SET readDate = NOW()
+    WHERE sno = #{_parameter}
+  </update>
+
+  <!-- 안읽은 쪽지 갯수 업데이트 -->
+  <select id="unRead" parameterType="NoteVo" resultType="Integer">
+    SELECT COUNT(*) FROM msg 
+    WHERE readDate is null and getEmployee = #{getEmployee};
+  </select>
+</mapper>

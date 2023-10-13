@@ -1,0 +1,152 @@
+.frmHrm {
+    width: 600px;
+    height: 870px;
+    margin: 60px auto;
+}
+
+.frmHrm .preview {
+    float: left;
+    width: 150px;
+    height: 180px;
+    margin-right: 20px;
+            cursor: pointer;
+}
+
+.frmHrm .imagePreview {
+    width: 160px;
+    height: 200px;
+}
+
+.frmHrm span{
+    width: 65px;
+    display: inline-block;
+    text-align: justify;
+}
+
+.frmHrm select option[value="0"][disabled] {
+	display: none;
+}
+
+/* .image{
+    transform: translate(70px, 20px);
+} */
+
+/* .company{
+    transform: translate(250px, -210px);
+    line-height: 30px;
+    margin: 20px, 0, 5px, 0;
+} */
+.comName{
+    padding-left: 5px;
+    padding-bottom: 3px;
+    width: 310px;
+    height: 29px;
+    border: none;
+    background-color: #f8f9fb;
+    border-bottom: 1px solid #aaa;
+    outline: none;
+    cursor: default;
+} 
+.employeeNumber{
+    padding-left: 5px;
+    width: 310px;
+    border: none;
+    background-color: #f8f9fb;
+    border-bottom: 1px solid #aaa;
+    line-height: 25px;
+    outline: none;
+        cursor: default;
+}
+.joinCompany{
+    padding-left: 5px;
+    width: 310px;
+    border: none;
+    border: 1px solid #aaa;
+    line-height: 25px;
+}
+.tier{
+    width: 310px;
+    height: 29px;
+    border: none;
+    border: 1px solid #aaa;
+}
+.departCode{
+    width: 150px;
+    height: 29px;
+    border: none;
+    border: 1px solid #aaa;
+}
+.teamCode{
+    margin-left: 90px;
+    width: 150px;
+    height: 29px;
+    border: none;
+    border: 1px solid #aaa;
+}
+
+.tel{
+    padding-left: 5px;
+    width: 310px;
+    border: none;
+    border: 1px solid #aaa;
+    line-height: 25px;
+}
+.company input{
+    margin-bottom: 6px;
+}
+.company select{
+    margin-bottom: 6px;
+}
+/* .pv{
+    transform: translate(110px, -200px);
+} */
+.pv input{
+    margin-bottom: 6px;
+    padding-left: 5px;
+    width: 480px;
+    border: none;
+    border: 1px solid #aaa;
+    line-height: 25px;
+}
+.pv .zipcode{
+    width: 80px;
+    border: none;
+    border-bottom: 1px solid #aaa;
+    outline: none;
+        background-color: #f8f9fb;
+}
+.pv .address1 {
+    border: none;
+        border-bottom: 1px solid #aaa;
+        outline: none;
+        background-color: #f8f9fb;
+}
+.pv .btnZipcode{
+    transform: translateY(1px);
+    width: 100px;
+    height: 29px;
+    border: none;
+    border: 1px solid #ccc;
+}
+
+.btnZone {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.btnZone button {
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.btnList {
+    background-color: #fff;
+	border: 1px solid #555;
+	color: #555;
+}
+.btnRegisterR {
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+}

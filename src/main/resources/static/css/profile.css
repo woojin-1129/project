@@ -1,0 +1,101 @@
+.frmEmployModify {
+    width: 500px;
+    margin: 50px auto;
+}
+.frmEmployModify>h1 {
+    text-align: center;
+}
+
+.frmEmployModify .titleText {
+    display: inline-block;
+    width: 80px;
+    height: 30px;
+}
+
+.profileViewImgZone {
+    float: left;
+    width: 150px;
+    height: 180px;
+    margin-right: 20px;
+}
+.profileViewImg {
+    width: 100%;
+    height: 100%;
+}
+
+.profileView>input {
+    outline: none;
+    background-color: #f8f9fb;
+}
+
+.profileView>.comName,
+.profileView>.employeeNumber,
+.profileView>.joinCompany,
+.profileView>.tier,
+.profileView>.tel {
+    width: 237px;
+    height: 25px;
+    font-size: 12pt;
+}
+.departCode,
+.teamCode,
+.profileView>.zipcode {
+    width: 100px;
+    height: 25px;
+    font-size: 12pt;
+}
+
+.profileView>.id,
+.profileView>.pwd,
+.profileView>.name,
+.profileView>.birthday,
+.profileView>.phone,
+.profileView>.email,
+.profileView>.address1,
+.profileView>.address2 {
+    width: 407px;
+    height: 25px;
+    font-size: 12pt;
+}
+
+.profileView>.comName,
+.profileView>.employeeNumber,
+.profileView>.joinCompany,
+.profileView>.tier,
+.profileView>.departCode,
+.profileView>.teamCode,
+.profileView>.zipcode,
+.profileView>.address1 {
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    cursor: default;
+}
+
+.profileView>.id {
+    margin-top: 10px;
+}
+
+.btnZone {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.btnZone button {
+    width: 80px;
+padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btnProfileModifyR {
+background-color: #fff;
+	border: 1px solid rgb(60, 168, 60);
+	color: rgb(60, 168, 60);
+}
+
+.btnHome {
+background-color: #fff;
+	border: 1px solid #555;
+	color: #555;
+}

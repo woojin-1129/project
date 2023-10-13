@@ -1,0 +1,95 @@
+#notion {
+	max-width: 900px;
+	margin: 20px auto;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+	font-family: Arial, sans-serif;
+	background-color: #f5f5f5;
+}
+
+.frmNotionModify {
+	height: 830px;
+	overflow-y: auto;
+}
+
+.frmNotionModify::-webkit-scrollbar {
+	width: 8px;
+}
+
+.frmNotionModify::-webkit-scrollbar-thumb {
+	background: #ccc;
+	border-radius: 5px;
+}
+
+.frmNotionModify::-webkit-scrollbar-track {
+	background: #eee;
+}
+
+#notion span {
+	font-weight: bold;
+}
+
+#notion input[type="text"],
+#notion textarea {
+	padding: 8px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	outline: none;
+	font-size: 16px;
+	resize: vertical;
+	margin-left: 5px;
+	margin-bottom: 5px;
+}
+#notion textarea {
+	width: 99%;
+	height: 200px;
+}
+
+.delAttFile {
+	margin-top: 10px;
+}
+
+#notion label {
+	display: block;
+	margin-bottom: 5px;
+	cursor: pointer;
+}
+
+#notion input[type="checkbox"] {
+	margin-right: 5px;
+}
+
+.btnModifyR,
+.btnList {
+	padding: 10px 15px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 16px;
+	color: #fff;
+}
+
+.btnModifyR {
+	width: 100px;
+	background-color: #fff;
+		border: 1px solid rgb(60, 168, 60);
+		color: rgb(60, 168, 60);
+	float: right;
+}
+
+.btnList {
+	background-color: #fff;
+		border: 1px solid #555;
+		color: #555;
+}
+
+#notion hr {
+	border: none;
+	border-top: 1px solid #ccc;
+	margin: 20px 0;
+}
+
+#notion input[type="file"] {
+	margin-top: 5px;
+}

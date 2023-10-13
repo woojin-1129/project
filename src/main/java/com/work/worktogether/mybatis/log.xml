@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="log">
+
+    <resultMap id="teamMap" type="TeamVo" autoMapping="true"></resultMap>
+    <resultMap id="DepartmentMap" type="DepartmentVo" autoMapping="true"></resultMap>
+    <resultMap id="TierCodeMap" type="TierCodeVo" autoMapping="true"></resultMap>
+
+    <resultMap id="employeesMap" type="EmployeesVo" autoMapping="true">
+        <collection property="team" resultMap="teamMap"></collection>
+        <collection property="department" resultMap="DepartmentMap"></collection>
+        <collection property="tierCode" resultMap="TierCodeMap"></collection>
+    </resultMap>
+
+    <resultMap id="LogMap" type="LogVo" autoMapping="true">
+        <collection property="employees" resultMap="employeesMap"></collection>
+    </resultMap>
+
+    <select id="commandCk" resultType="CommandVo">
+        select sno , commandText from command
+    </select>
+
+    <select id="tierOneSelect" resultType="EmployeesVo">
+        select employeeNumber from employees
+        where tier = 1
+        order by sno asc
+        limit 0 , 1
+    </select>
+
+    <insert id="logInsert" parameterType="LogVo">
+        insert into logg(employeeNumber , doc , logType, finalDate)
+        values(#{employeeNumber} , #{doc} , #{logType} , sysdate())
+    </insert>
+
+    <insert id="logInsert2" parameterType="LogVo">
+        insert into logg(employeeNumber , doc , logType, finalDate)
+        values(#{employeeNumber} , #{doc} , #{logType} , sysdate())
+    </insert>
+
+    <select id="hrmNameSelect" parameterType="Integer" resultType="EmployeesVo">
+        select employeeNumber , name from employees
+        where sno = #{_parameter}
+    </select>
+
+    <select id="totSize1" parameterType="Page" resultType="Integer">
+        select count(l.sno) totSize
+        from logg l
+        join employees e on l.employeeNumber = e.employeeNumber
+        where l.employeeNumber like '%${findStr}%' or doc like '%${findStr}%' or finalDate like
+        '%${findStr}%' or e.name like '%${findStr}%'
+    </select>
+
+    <select id="totSize2" parameterType="Page" resultType="Integer">
+        select count(l.sno) totSize
+        from logg l
+        join employees e on l.employeeNumber = e.employeeNumber
+        where (l.employeeNumber like '%${findStr}%' or doc like '%${findStr}%' or finalDate like '%${findStr}%' or e.name like '%${findStr}%') 
+        and logType = 'in'
+    </select>
+
+        <select id="totSize3" parameterType="Page" resultType="Integer">
+        select count(l.sno) totSize
+        from logg l
+        join employees e on l.employeeNumber = e.employeeNumber
+       where (l.employeeNumber like '%${findStr}%' or doc like '%${findStr}%' or finalDate like '%${findStr}%' or e.name like '%${findStr}%') 
+        and logType = 'board' or logType = 'chat'
+    </select>
+
+        <select id="find" resultMap="LogMap" parameterType="Page">
+        select l.sno , l.employeeNumber , doc , finalDate , logType , e.name
+        from logg l
+        join employees e on l.employeeNumber = e.employeeNumber
+        where l.employeeNumber like '%${findStr}%' or doc like '%${findStr}%' or finalDate like
+        '%${findStr}%' or e.name like '%${findStr}%'
+        order by l.sno desc
+        limit #{startNo} , #{listSize}
+    </select>
+
+    <select id="bossAttendance" resultMap="LogMap" parameterType="Page">
+        select l.sno , l.employeeNumber , doc , finalDate , logType , e.name
+        from logg l
+        join employees e on l.employeeNumber = e.employeeNumber
+        where (l.employeeNumber like '%${findStr}%' or doc like '%${findStr}%' or finalDate like '%${findStr}%' or e.name like '%${findStr}%') 
+        and logType = 'in'
+        order by l.sno desc
+        limit #{startNo} , #{listSize}
+    </select>
+
+    <select id="bossDoc" resultMap="LogMap" parameterType="Page">
+        select l.sno , l.employeeNumber , doc , finalDate , logType , e.name 
+        from logg l 
+        join employees e on l.employeeNumber = e.employeeNumber 
+        where (l.employeeNumber like '%${findStr}%' or doc like '%${findStr}%' or finalDate like '%${findStr}%' or e.name like '%${findStr}%') 
+        and logType = 'board' or logType = 'chat'
+        order by l.sno desc 
+        limit #{startNo} , #{listSize}
+    </select>
+
+</mapper>

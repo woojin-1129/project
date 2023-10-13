@@ -1,0 +1,69 @@
+.result {
+  width: 100%;
+  margin: 0 auto;
+  margin-left: -10px;
+}
+
+/* 댓글 목록 스타일 */
+.result .list {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.result .list span {
+  margin: 5px 0;
+}
+
+.result .sno {
+  font-weight: bold;
+}
+
+.result .name {
+  color: #007bff;
+}
+
+.result .creDate {
+  color: #999;
+  float: right;
+  transform: translateY(10px);
+  font-size: 0.95em;
+}
+
+.result .doc {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.result input[id=doc] {
+  width: 100%;
+  display: block;
+    margin-top: 10px;
+      margin-bottom: 10px;
+}
+
+/* 반응형 스타일 */
+@media (max-width: 768px) {
+  .result {
+    width: 90%;
+  }
+}
+.btnReplDelete, .btnReplModify {
+  width: 40px;
+  height: 20px;
+  cursor: pointer;
+  font-size:8pt;
+  border: none;
+  background-color: #f5f5f5;
+  color: #888;
+  transform: translate(-10px, 10px);
+
+}
+
+.btnReplDelete:hover,
+.btnReplModify:hover {
+  font-weight: 1000;
+  color: black;
+}

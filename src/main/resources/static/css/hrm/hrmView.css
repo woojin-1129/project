@@ -1,0 +1,168 @@
+.frmHrm {
+    width: 600px;
+    height: 870px;
+    margin: 60px auto;
+}
+
+.frmHrm .photoZone {
+    float: left;
+    width: 150px;
+    height: 180px;
+    margin-right: 20px;
+}
+.frmHrm .priPhoto {
+    width: 160px;
+    height: 200px;
+}
+
+.frmHrm span{
+    width: 65px;
+    display: inline-block;
+    text-align: justify;
+}
+.frmHrm select option[value="0"][disabled] {
+	display: none;
+}
+/* .image{
+    transform: translate(70px, 20px);
+} */
+.previewZone{
+    width: 160px;
+    height: 200px;
+}
+#preview_image{
+    width: 160px;
+    height: 200px;
+}
+/* .company{
+    transform: translate(250px, -210px);
+    line-height: 30px;
+    margin: 20px, 0, 5px, 0;
+} */
+.frmHrm input {
+        border: none;
+    background-color: #f8f9fb;
+        border-bottom: 1px solid #aaa;
+        outline: none;
+        cursor: default;
+}
+.comName {
+    padding-left: 5px;
+    padding-bottom: 3px;
+    width: 310px;
+    height: 29px;
+}
+
+.employeeNumber {
+    padding-left: 5px;
+    width: 310px;
+    line-height: 25px;
+}
+
+.joinCompany {
+    padding-left: 5px;
+    width: 310px;
+    line-height: 25px;
+}
+
+.tier {
+    width: 310px;
+    height: 29px;
+}
+
+.departCode {
+    width: 150px;
+    height: 29px;
+}
+
+.teamCode {
+    margin-left: 90px;
+    width: 150px;
+    height: 29px;
+}
+
+.tel {
+    padding-left: 5px;
+    width: 310px;
+    line-height: 25px;
+    margin-top: 10px;
+}
+
+.company input {
+    margin-bottom: 6px;
+}
+
+.company .department {
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+.company .tier {
+    padding-left: 5px;
+    font-size: 0.9em;
+    display: inline-block;
+    width: 310px;
+    border-bottom: 1px solid #aaa;
+}
+
+.company .departName,
+.company .teamName {
+    transform: translateY(10px);
+    padding-left: 5px;
+    font-size: 0.9em;
+    display: inline-block;
+    width: 152px;
+    border-bottom: 1px solid #aaa;
+}
+/* .pv{
+    transform: translate(110px, -200px);
+} */
+
+.pv .id {
+    margin-top: 10px;
+}
+.pv input {
+    margin-bottom: 6px;
+    padding-left: 5px;
+    width: 480px;
+    line-height: 25px;
+}
+
+.pv .zipcode {
+    width: 80px;
+}
+
+.pv .btnZipcode {
+    transform: translateY(1px);
+    width: 100px;
+    height: 29px;
+}
+
+.btnZone {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.btnZone button {
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btnList {
+        background-color: #fff;
+            border: 1px solid #555;
+            color: #555;
+}
+
+.btnModify {
+    background-color: #fff;
+        border: 1px solid rgb(60, 168, 60);
+        color: rgb(60, 168, 60);
+}
+
+.btnDelete {
+    background-color: #fff;
+        color: #dc3545;
+        border: 1px solid #dc3545;
+}

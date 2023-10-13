@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="profile">
+
+    <resultMap id="teamMap" type="TeamVo" autoMapping="true"></resultMap>
+    <resultMap id="DepartmentMap" type="DepartmentVo" autoMapping="true"></resultMap>
+    <resultMap id="TierCodeMap" type="TierCodeVo" autoMapping="true"></resultMap>
+
+    <resultMap id="employeesMap" type="EmployeesVo" autoMapping="true">
+        <collection property="team" resultMap="teamMap"></collection>
+        <collection property="department" resultMap="DepartmentMap"></collection>
+        <collection property="tierCode" resultMap="TierCodeMap"></collection>
+    </resultMap>
+
+    <select id="profileSelect" parameterType="String" resultMap="employeesMap"> 
+        select sno ,employeeNumber , dirNumber , comName , id , pwd , name , tc.tierName , email , tel , phone , e.tier , zipcode , address1 , address2 , e.teamCode, t.teamName , e.departCode , d.departName , birthday, joinCompany , oriPhoto , sysPhoto 
+        from employees e 
+        join team t on e.teamCode = t.teamCode 
+        join department d on e.departCode = d.departCode 
+        join tierCode tc on e.tier = tc.tier 
+        where employeeNumber = #{_parameter} 
+    </select>
+
+    <update id="profileModifyR" parameterType="employeesVo"> 
+        update employees set id = #{id} , pwd = #{pwd} , name = #{name} , birthday = #{birthday} , phone = #{phone} , email = #{email} ,
+        zipcode = #{zipcode} , address1 = #{address1} , address2 = #{address2} 
+        where sno = #{sno}
+    </update>
+
+
+   
+</mapper>

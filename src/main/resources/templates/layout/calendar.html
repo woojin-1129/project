@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>일정 관리</title>
+  <link rel="stylesheet" href="css/calendar.css">
+  <script defer src="js/calendar.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+
+<body>
+  </head>
+
+  <body>
+    <div class="loadingImg"></div>
+    <main id="calendarMain">
+
+      <div id="btnCalendarZone">
+        <button type="button" class="btnCalendarZone" id="btnAllCalendar">전체일정</button>
+        <button type="button" class="btnCalendarZone" id="btnPersonal">개인일정</button>
+        <button type="button" class="btnCalendarZone" id="btnTeam">팀일정</button>
+        <button type="button" class="btnCalendarZone" id="btnDepartment">부서일정</button>
+      </div>
+
+
+      <!-- 일정추가 모달 -->
+      <div id="calendarModal" class="calendarModal">
+        <div class="modal-content">
+
+          <span class="closeModal">&times;</span>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">일정추가</h1>
+
+          <label class="col-form-label"><strong>개인 / 부서 / 팀 </strong>선택
+            <select id="selectType" class="form-select" aria-label="Default select example">
+              <option value="1">개인 일정</option>
+              <option value="2">팀 일정</option>
+              <option value="3">부서 일정</option>
+            </select>
+          </label>
+
+          <label class="col-form-label">제목
+            <input type="text" class="form-control" id="calendarTitle">
+          </label>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="btnCalendarAdd">추가하기</button>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+
+  </body>
+
+</html>

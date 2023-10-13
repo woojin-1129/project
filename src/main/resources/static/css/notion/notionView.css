@@ -1,0 +1,139 @@
+#notion {
+	position: relative;
+	max-width: 900px;
+	margin: 20px auto;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+	font-family: Arial, sans-serif;
+	background-color: #f5f5f5;
+}
+
+.frmNotionView {
+	height: 830px;
+	overflow-y: auto;
+}
+
+.frmNotionView::-webkit-scrollbar {
+	width: 8px;
+}
+
+.frmNotionView::-webkit-scrollbar-thumb {
+	background: #ccc;
+	border-radius: 5px;
+}
+
+.frmNotionView::-webkit-scrollbar-track {
+	background: #eee;
+}
+
+#notion span {
+	font-weight: bold;
+}
+
+#notion input[type="text"],
+#notion .viewDoc {
+	padding: 8px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	outline: none;
+	font-size: 16px;
+	cursor: default;
+	margin-left: 5px;
+	margin-bottom: 5px;
+}
+#notion .viewTitle {
+	width: 97%;
+}
+
+#notion .viewDoc {
+	width: 97.5%;
+	height: 200px;
+	margin-left: 0px;
+	background-color: white;
+}
+
+.attZone{
+	float: right;
+	margin-right: 100px;
+	cursor: pointer;
+}
+
+.attZone a {
+	text-decoration: none;
+	color: #007bff;
+
+}
+
+.replText {
+	display: block;
+}
+
+.notionBtnZone {
+	margin-top: 10px;
+	margin-right: 20px;
+}
+
+.btnModify,
+.btnDelete,
+.btnList,
+.btnReplSummit {
+	padding: 10px 15px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 16px;
+}
+.btnDelete {
+	background-color: #fff;
+	color: #dc3545;
+	border: 1px solid #dc3545;
+	float: right;
+	margin-left: 10px;
+	margin-right: 3px;
+}
+
+.btnModify {
+	background-color: #fff;
+	border: 1px solid rgb(60, 168, 60);
+	color: rgb(60, 168, 60);
+	float: right;
+}
+
+.btnList {
+	background-color: #fff;
+	border: 1px solid #555;
+	color: #555;
+}
+
+.btnReplSummit {
+	position: absolute;
+	width: 60px;
+	height: 70px;
+	background-color: #007bff;
+	color: #fff;
+}
+
+.replZone {
+	position: relative;
+	margin-top: 70px;
+}
+
+.resultRepl {
+	margin-top: 10px;
+	padding: 10px;
+	background-color: #f5f5f5;
+	border-radius: 4px;
+}
+
+.replDoc {
+	width: 770px;
+	height: 70px;
+	font-size: 12pt;
+	word-wrap: break-word;
+	resize: none;
+}
+
+#notion input[type="file"] {
+	margin-top: 5px;
+}

@@ -1,0 +1,51 @@
+/* register */
+.signRegister {
+    position: relative;
+    width: 1060px;
+    margin: 0px auto;
+}
+
+.signRegisterTitle>h3 {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.signForm {
+    height: 23px;
+}
+
+.form {
+    width: 100%;
+    height: 752px;
+}
+
+.RegisterBtnZone {
+    margin-top: 20px;
+}
+
+.RegisterBtnZone>button {
+            padding: 8px 16px;
+
+            border-radius: 4px;
+            cursor: pointer;
+}
+.btnRegisterR {
+    width: 80px;
+    background-color: #007bff;
+                border: none;
+                    color: #fff;
+                    float: right;
+                    margin-left: 10px;
+}
+.btnRegisterTemp {
+    background-color: #6d9cce;
+                    border: none;
+                        color: #fff;
+                        float: right;
+}
+.btnSignHome {
+background-color: #fff;
+	border: 1px solid #555;
+	color: #555;
+    float: left;
+}

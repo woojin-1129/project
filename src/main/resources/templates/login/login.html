@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/css/login.css">
+
+	<script src="https://code.jquery.com/jquery-3.7.0.min.js"
+		integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous">
+		</script>
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+	<script defer src="js/login.js"></script>
+
+	<title>로그인</title>
+</head>
+
+<body>
+	<div class="login-wrapper">
+		<h2>Login</h2>
+		<form id="login-form" name="form">
+			<input type="text" class="id" name="id" placeholder="ID" autocomplete="off">
+			<input type="password" name="pwd" placeholder="Password" class="pwd" autocomplete="off">
+			<label for="remember-check">
+				<input class="formCheckInput" type="checkbox" id="flexCheckDefault" checked> 아이디 저장하기
+			</label>
+			<input type="button" id="login-btnLogin" value="Login">
+			<span id="login-info">ID,PW 관리자에게 문의</span>
+		</form>
+	</div>
+</body>
+
+</html>

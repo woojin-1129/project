@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+	<script defer src="/js/vote.js"></script>
+	<link rel="stylesheet" href="/css/vote/voteList.css" />
+	<title>잇다</title>
+</head>
+
+<body>
+	<form name="frmVoteList" class="frmVoteList">
+		<button type="button" class="btnCreateVote"><span>투표 작성</span></button>
+		<br />
+		<div th:each="v : ${list}" class="resultContainner" th:onclick="'resultContainner('+${v.sno}+')'">
+			<div th:text="${v.title}"></div>
+			<div th:text="${v.employees.name}"></div>
+		</div>
+	</form>
+</body>
+
+</html>

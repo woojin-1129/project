@@ -1,0 +1,321 @@
+#myDiv {
+    position: absolute;
+    width: 400px;
+    height: 600px;
+    left: 382px;
+    top: 60px;
+    z-index: 9;
+    background-color: rgb(198, 220, 231);
+    border: 1px solid #d3d3d3;
+    border-radius: 3px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+#myDivHeader {
+    border-radius: 3px;
+    position: relative;
+    padding: 3px;
+    height: 30px;
+    z-index: 10;
+    cursor: default;
+    background-color: #2196F3;
+    color: #fff;
+}
+
+.chatHome {
+    position: absolute;
+    right: 30px;
+    top: 5px;
+    cursor: pointer;
+}
+
+.chatRoomOut {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    cursor: pointer;
+}
+
+.bi-arrow-return-left , .bi-box-arrow-left {
+stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.3;
+}
+
+.chatRoomCreate {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    cursor: pointer;
+    width: 23px;
+    height: 18px;
+}
+
+.roomC {
+    margin: 100px auto;
+}
+
+.roomTitle {
+    text-align: left;
+    width: 250px;
+    height: 40px;
+    font-size: 14pt;
+    display: block;
+    outline: none;
+}
+
+.btnRoomCreate {
+    width: 150px;
+    display: block;
+    margin: 20px auto;
+    cursor: pointer;
+    background-color: #007bff;
+    padding: 10px 10px;
+    color: #fff;
+    border: none;
+        border-radius: 4px;
+}
+
+.chatClose,
+.inviteClose {
+    position: absolute;
+    right: 0;
+    top: 0px;
+    cursor: pointer;
+    width: 30px;
+    height: 27px;
+}
+
+.chatList {
+    background-color: rgb(198, 220, 231);
+    width: 100%;
+    height: 485px;
+
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+
+    overflow-y: auto;
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.chatList::-webkit-scrollbar {
+    display: none;
+}
+
+.dateDiv {
+    margin: 30px auto;
+    width: 200px;
+    height: 30px;
+    line-height: 30px;
+    background-color: rgba(100, 100, 100, 0.2);
+    border-radius: 30px;
+}
+
+.invite {
+    position: absolute;
+    cursor: pointer;
+    right: 10px;
+    top: 40px;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    border-radius: 35%;
+    background-color: rgba(245, 245, 245, 0.5);
+    z-index: 1000;
+}
+
+.bi-person-plus-fill {
+    transform: translate( 2px , 3px);
+    opacity: 0.45;
+}
+
+.invite:hover .bi-person-plus-fill {
+    opacity: 1;
+}
+
+.invite:hover {
+    background-color: rgba(245, 245, 245, 0.8);
+}
+
+/* 상대방 채팅 */
+.youChat {
+    width: 100%;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.ChatImg {
+    width: 45px;
+    height: 45px;
+    border-radius: 17px;
+    margin-right: 10px;
+}
+
+.ChatName {
+    opacity: 0.8;
+    font-size: 13px;
+    display: block;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.ChatMessage {
+    background-color: white;
+    padding: 7px;
+    border-radius: 10px;
+    border-top-left-radius: 0;
+}
+
+.ChatInfo {
+    display: flex;
+    align-items: flex-end;
+}
+
+.ChatTime {
+    margin-left: 5px;
+    opacity: 0.8;
+    font-size: 13px;
+}
+
+/* 내 채팅 */
+.myChat {
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+.myChat .ChatMessage {
+    background-color: yellow;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 0px;
+    margin-right: 0;
+    margin-left: 5px;
+}
+
+.myChat .ChatInfo {
+    flex-direction: row-reverse;
+}
+
+.chatDoc {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 91%;
+    height: 90px;
+    resize: none;
+    outline: none;
+    border: none;
+    font-size: 12pt;
+    border-bottom-left-radius: 3px;
+}
+
+.btnChat {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    height: 90px;
+    outline: none;
+    cursor: pointer;
+    border: none;
+    background-color: #007bff;
+    border-radius: 0px 4px 4px 0px;
+    color: #fff;
+}
+
+.room {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    background-color: white;
+    cursor: pointer;
+    text-align: left;
+    padding-left: 30px;
+    border-bottom: 1px solid #ccc;
+}
+
+.nal {
+    float: right;
+    margin-right: 10px;
+    font-size: 10pt;
+}
+
+
+.invitePop {
+    border-radius: 3px;
+    width: 300px;
+    height: 300px;
+
+    position: absolute;
+    right: -300px;
+    top: -1px;
+    border: 1px solid #d3d3d3;
+    background-color: rgb(198, 220, 231);
+}
+
+.invitePopHeader {
+    border-radius: 3px;
+    width: 100%;
+    height: 30px;
+    color: white;
+    text-align: center;
+    background-color: #2196F3;
+    padding: 3px;
+}
+
+.invitePopView {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.inviteInput {
+    width: 100%;
+    height: 30px;
+    padding: 5px;
+    border-radius: 4px;
+    outline: none;
+    border: 1px solid #ccc;
+}
+
+.inviteList {
+    margin-top: 3px;
+    width: 100%;
+    height: 230px;
+    overflow-y: auto;
+    padding: 5px;
+}
+
+.inviteItem {
+    display: inline-block;
+    width: 60px;
+    margin: 2px;
+
+    cursor: pointer;
+}
+
+.inviteImg {
+    margin: 0 auto;
+    width: 45px;
+    height: 45px;
+    border-radius: 17px;
+    display: block;
+}
+
+.inviteName,
+.inviteDepart,
+.inviteTeam,
+.inviteTier,
+.inviteBoss {
+    font-size: 10pt;
+}
+
+.inviteName {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

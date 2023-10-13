@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper      
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"      
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="oc">
+
+    <resultMap id="teamMap" type="TeamVo" autoMapping="true"></resultMap>
+    <resultMap id="DepartmentMap" type="DepartmentVo" autoMapping="true"></resultMap>
+    <resultMap id="TierCodeMap" type="TierCodeVo" autoMapping="true"></resultMap>
+
+    <resultMap id="employeesMap" type="EmployeesVo" autoMapping="true">
+        <collection property="team" resultMap="teamMap"></collection>
+        <collection property="department" resultMap="DepartmentMap"></collection>
+        <collection property="tierCode" resultMap="TierCodeMap"></collection>
+    </resultMap>
+
+    <select id="selectEmployeeDepart" parameterType="String" resultMap="employeesMap">
+        select e.sno , e.employeeNumber , e.dirNumber , e.comName , e.id , e.pwd , e.name , e.tier , e.email , e.tel , e.phone , e.zipcode , e.address1 , e.address2 ,
+        e.teamCode ,e.departCode , e.birthday , e.joinCompany, e.oriPhoto , e.sysPhoto, d.departName, t.teamName, tc.tierName
+        from employees e
+        join department d on e.departCode = d.departCode
+        join team t  on e.teamCode = t.teamCode
+        join tiercode tc on e.tier = tc.tier
+        where d.departCode = #{_paramter}
+        order by tier asc
+    </select>
+
+        <select id="selectEmployeeDepartTest" parameterType="java.util.Map" resultMap="employeesMap">
+        select e.sno , e.employeeNumber , e.dirNumber , e.comName , e.id , e.pwd , e.name , e.tier , e.email , e.tel , e.phone , e.zipcode , e.address1 , e.address2 ,
+        e.teamCode ,e.departCode , e.birthday , e.joinCompany, e.oriPhoto , e.sysPhoto, d.departName, t.teamName, tc.tierName
+        from employees e
+        join department d on e.departCode = d.departCode
+        join team t on e.teamCode = t.teamCode
+        join tiercode tc on e.tier = tc.tier
+        where (e.name like '%${findStr}%'
+        or d.departName like '%${findStr}%'
+        or t.teamName like '%${findStr}%'
+        or e.employeeNumber like '%${findStr}%') and d.departCode = #{depart}
+        order by tier asc
+    </select>
+
+
+
+    <select id="selectDepart" resultType="DepartmentVo">
+        select departCode , departName from department
+        ORDER BY departName asc
+    </select>
+
+    <select id="selectDepartTest" resultType="DepartmentVo" parameterType="String">
+        select DISTINCT d.departCode , d.departName
+        from department d
+        join employees e on e.departCode = d.departCode
+        join team t on e.teamCode = t.teamCode
+        join tiercode tc on e.tier = tc.tier
+        where e.name like '%${_parameter}%'
+        or d.departName like '%${_parameter}%'
+        or t.teamName like '%${_parameter}%'
+        or e.employeeNumber like '%${_parameter}%'
+        ORDER BY d.departName asc 
+    </select>
+
+</mapper>

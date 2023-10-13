@@ -1,0 +1,65 @@
+.frmVoteList * {
+	font-family: 'Nanum Barun Gothic', 'Nanum Gothic', Noto Sans CJK KR, sans-serif !important;
+}
+
+.frmVoteList {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	/* max-width: 1200px; */
+	height: 100vh;
+	margin: 0 auto;
+	padding: 20px;
+	overflow-y: auto;
+}
+
+/* Style for result container */
+.resultContainner {
+	background-color: #fff;
+	border: 1px solid #BBB;
+	padding: 10px;
+}
+
+.resultContainner,
+.btnCreateVote {
+	flex: 0 2 calc(33.33% - 10px);
+	margin: 10px 0;
+	cursor: pointer;
+	transition: background-color 0.3s;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.resultContainner:hover {
+	background-color: #c9c9c9;
+}
+
+/* Adjusted square shape for result container */
+.resultContainner::before {
+	content: "";
+	padding-bottom: 40%;
+	/* Adjust the value as needed */
+	display: block;
+}
+
+/* Style for create vote button */
+.btnCreateVote {
+	padding: 10px 20px;
+	background-color: #007bff;
+
+	border: none;
+	position: relative;
+}
+
+.btnCreateVote span {
+	position: absolute;
+	color: #fff;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.btnCreateVote:hover {
+	background-color: #0056b3;
+}

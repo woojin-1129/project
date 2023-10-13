@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="chat">
+
+    <resultMap id="teamMap" type="TeamVo" autoMapping="true"></resultMap>
+    <resultMap id="DepartmentMap" type="DepartmentVo" autoMapping="true"></resultMap>
+    <resultMap id="TierCodeMap" type="TierCodeVo" autoMapping="true"></resultMap>
+
+    <resultMap id="employeesMap" type="EmployeesVo" autoMapping="true">
+        <collection property="team" resultMap="teamMap"></collection>
+        <collection property="department" resultMap="DepartmentMap"></collection>
+        <collection property="tierCode" resultMap="TierCodeMap"></collection>
+    </resultMap>
+
+
+    <resultMap id="ChatMap" type="ChatVo" autoMapping="true">
+        <collection property="employees" resultMap="employeesMap"></collection>
+    </resultMap>
+
+    <select id="roomSelect" parameterType="String" resultType="Room">
+        select sno , roomId , employeeNumber , roomTitle , finalDate 
+        from room
+        where employeeNumber = #{_parameter}
+        order by finalDate desc
+    </select>
+
+    <select id="roomIn" parameterType="Integer" resultMap="ChatMap">
+        select c.sno , c.pSno , c.employeeNumber , c.creDate , c.doc , e.sysPhoto , e.name 
+        from chat c join employees e
+        on c.employeeNumber = e.employeeNumber 
+        where pSno = #{_parameter}
+        order by creDate asc
+    </select>
+
+    <select id="roomCnt" parameterType="Integer" resultType="Room">
+        select employeeNumber from room
+        where roomId = #{_parameter}
+    </select>
+
+    <insert id="insertChat" parameterType="ChatVo">
+        insert into chat(pSno , employeeNumber , doc , creDate)
+        values(#{pSno} , #{employeeNumber} , #{doc} , sysDate())
+    </insert>
+
+    <update id="roomTimeUpdate" parameterType="ChatVo">
+        update room set finalDate = sysdate()
+        where roomId = #{pSno}
+    </update>
+
+    <select id="chatUserSelect" parameterType="String" resultType="EmployeesVo">
+        select employeeNumber , name , sysPhoto from employees
+        where employeeNumber = #{_parameter}
+    </select>
+
+    <select id="lastChat" parameterType="ChatVo" resultType="ChatVo">
+        select sno , pSno , employeeNumber , creDate , doc from chat
+        where pSno = #{pSno}
+        order by sno desc
+        limit 0 , 1
+    </select>
+
+    <select id="inviteSearch" parameterType="java.util.Map" resultMap="employeesMap">
+        select e.sysPhoto , e.name , e.employeeNumber , e.tier , d.departName , t.teamName , tc.tierName , e.comName
+        from employees e
+        join team t on e.teamCode = t.teamCode
+        join department d on e.departCode = d.departCode
+        join tierCode tc on e.tier = tc.tier
+        where (name like '%${find}%') and 
+        <foreach collection="emp" item="v" separator="and">
+            employeeNumber != #{v}
+        </foreach>
+        order by name asc
+    </select>
+
+    <insert id="invite" parameterType="Room">
+        insert into room(roomId , roomTitle , employeeNumber , finalDate)
+        values(#{roomId} , #{roomTitle} , #{employeeNumber} , #{finalDate})
+    </insert>
+
+    <select id="roomS" parameterType="Integer" resultType="String">
+        select roomTitle from room
+        where roomId = #{_parameter}
+        limit 0 , 1
+    </select>
+
+    <delete id="roomOut" parameterType="Room">
+        delete from room
+        where roomId = #{roomId} and employeeNumber = #{employeeNumber}
+    </delete>
+
+    <select id="getRoomId" resultType="Integer">
+        select pSno from Chat
+        order by pSno desc
+        limit 0 , 1
+    </select>
+
+    <insert id="roomCreate" parameterType="Room">
+        insert into room(roomId , roomTitle , employeeNumber , finalDate)
+        values(#{roomId} , #{roomTitle} , #{employeeNumber} , sysDate())
+    </insert>
+</mapper>

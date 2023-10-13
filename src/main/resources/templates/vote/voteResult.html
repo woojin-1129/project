@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Document</title>
+	<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+	<link rel="stylesheet" href="/css/vote/voteResult.css" />
+	<script defer src="/js/vote.js"></script>
+</head>
+
+<body>
+	<form name="frmVoteResult" class="frmVoteResult">
+		<div class="startContainner">
+			<div class="question">
+				<span th:text="${vo.title}"></span>
+			</div>
+			<span class="employeesName" th:text="${vo.employees.name}"></span>
+			<div class="main">
+				<span class="selectDocT">질문</span>
+				<span class="selectCountT">&nbsp;</span>
+				<div th:each="select : ${vo.voteSelect}">
+					<span class="selectDoc" th:text="${select.selectDoc}"></span>
+					<span th:each="list : ${vo.voteList}">
+						<span class="selectCount" th:if="${select.selectDoc eq list.value}" th:text="|${list.count}명|"></span>
+					</span>
+					<br />
+				</div>
+				<div class="userSelect">
+					<span th:if="${vo.mySelect.size ne 0}">내가 선택한 값:</span>
+					<span th:each="mySel , i : ${vo.mySelect}">
+						<span th:text="${mySel.value}"></span>
+						<span th:if="${i.count ne i.size}">,</span>
+					</span>
+				</div>
+			</div>
+			<button type="button" class="btnVoteList">목록으로</button>
+			<button type="button" class="btnVoteDeleteR"
+				th:if="${vo.employeeNumber eq session.employeeNumber}">삭제</button>
+			<input type="hidden" name="sno" th:value="${vo.sno}" />
+		</div>
+	</form>
+</body>
+
+</html>

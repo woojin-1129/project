@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="vote">
+
+<resultMap id="employeesMap" type="EmployeesVo" autoMapping="true"></resultMap>
+
+  <resultMap id="VoteMap" type="VoteQuestion" autoMapping="true">
+  <collection property="employees" resultMap="employeesMap"></collection>
+  </resultMap>
+
+<select id="getVoteSno" parameterType="String" resultType="Integer">
+  select getVoteSno(#{_parameter})
+</select>
+
+<insert id="register" parameterType="VoteQuestion">
+  insert into voteQuestion(sno,title,employeeNumber,startDate,endDate,typeValue) 
+  values(#{sno},#{title},#{employeeNumber},sysDate(),#{endDate},#{typeValue})
+</insert>
+
+<insert id="insertVoteSelect" parameterType="VoteQuestion">
+  insert into voteSelect(pSno, selectDoc) values
+    <foreach collection="selectDoc" separator="," item="doc">
+    (#{sno}, #{doc})
+    </foreach>
+</insert>
+
+<select id="view" parameterType="Integer" resultType="VoteQuestion">
+  select sno , title , employeeNumber , typeValue from voteQuestion
+  where sno = #{_parameter}
+</select>
+
+<select id="empSelect" parameterType="String" resultType="EmployeesVo">
+  select employeeNumber , name from employees where employeeNumber = #{_parameter}
+</select>
+
+<select id="selectList" parameterType="Integer" resultType="VoteSelect">
+  select pSno , selectDoc from voteSelect where pSno = #{_parameter}
+</select>
+
+<insert id="insertVoteSelectS" parameterType="VoteSelect">
+insert into voteList(pSno, value, employeeNumber) values(#{pSno} , #{selectDoc},#{employeeNumber})
+</insert>
+
+<insert id="insertVoteSelectM" parameterType="VoteSelect">
+insert into voteList(pSno, value, employeeNumber) values
+<foreach collection="selectArray" separator="," item="doc">
+  (#{pSno}, #{doc},#{employeeNumber})
+</foreach>
+</insert>
+
+<select id="voteList" parameterType="Integer" resultType="VoteList">
+  select count(sno) as 'count', value from votelist v 
+  where pSno = #{_parameter}
+  group by value
+</select>
+
+<select id="mySelect" parameterType="java.util.Map" resultType="VoteList">
+  select value from voteList 
+  where pSno = #{pSno} and employeeNumber = #{employeeNumber}
+</select>
+
+<select id="voteMainList" resultMap="VoteMap">
+  select v.sno , v.employeeNumber , e.name , v.title from voteQuestion v join employees e on e.employeeNumber = v.employeeNumber
+  order by v.sno desc
+</select>
+
+<select id="selectView" parameterType="java.util.Map" resultType="VoteList">
+  select value from voteList where pSno = #{pSno} and employeeNumber = #{employeeNumber}
+</select>
+
+<delete id="valueDelete" parameterType="Integer">
+  delete from voteList where pSno = #{_parameter}
+</delete>
+
+<delete id="selectDocDelete" parameterType="Integer">
+  delete from voteSelect where pSno = #{_parameter}
+</delete>
+
+<delete id="voteDelete" parameterType="Integer">
+  delete from voteQuestion where sno = #{_parameter}
+</delete>
+
+<select id="selectTime" resultType="VoteQuestion" parameterType="Integer">
+    select endDate from voteQuestion
+    where sno = #{_parameter}
+</select>
+
+</mapper>

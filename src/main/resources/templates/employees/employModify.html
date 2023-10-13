@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>잇다</title>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous">
+        </script>
+    <link rel="stylesheet" href="/css/profile.css">
+    <script src="/js/profile.js"></script>
+</head>
+
+<body>
+    <form name="frmEmployModify" class="frmEmployModify">
+        <h1>정 보 수 정</h1>
+        <div class="profileViewImgZone">
+            <img class="profileViewImg" th:src="${vo.sysPhoto eq null} ? @{/upload/null.png} : @{/upload/}+${vo.sysPhoto}">
+        </div>
+        <div class="profileView">
+            <span class="titleText">회&ensp;사&ensp;명</span>
+            <input class="comName" type="text" name="comName" th:value="${vo.comName}" readonly>
+            <br>
+            <span class="titleText">사&ensp;&ensp;&ensp;&ensp;번</span>
+            <input class="employeeNumber" type="text" name="employeeNumber" th:value="${vo.employeeNumber}" readonly>
+            <br>
+            <span class="titleText">입&ensp;사&ensp;일</span>
+            <input class="joinCompany" type="text" name="joinCompany" th:value="${vo.joinCompany}" readonly>
+            <br>
+            <span class="titleText">직&ensp;&ensp;&ensp;&ensp;급</span>
+            <input class="tier" type="text" name="tierName" th:value="${vo.tierCode.tierName}" readonly>
+            <br>
+            <span class="titleText">부&ensp;&ensp;&ensp;&ensp;서</span>
+            <input class="departCode" type="text" name="departName" th:value="${vo.department.departName}" readonly>
+            <span>팀</span>
+            <input class="teamCode" type="text" name="teamName" th:value="${vo.team.teamName}" readonly>
+            <br>
+            <span class="titleText">사내번호</span>
+            <input class="tel" type="tel" name="tel" th:value="${vo.tel}" autocomplete="off">
+
+            <br>
+
+            <span class="titleText">아&ensp;이&ensp;디</span>
+            <input class="id" type="text" name="id" th:value="${vo.id}" autocomplete="off">
+            <br>
+            <span class="titleText">패스워드 </span>
+            <input class="pwd" type="password" name="pwd" th:value="${vo.pwd}" autocomplete="off">
+            <br>
+            <span class="titleText">성&ensp;&ensp;&ensp;&ensp;명</span>
+            <input class="name" type="text" name="name" th:value="${vo.name}" autocomplete="off">
+            <br>
+            <span class="titleText">생년월일 </span>
+            <input class="birthday" type="date" name="birthday" th:value="${vo.birthday}" autocomplete="off">
+            <br>
+            <span class="titleText">연&ensp;락&ensp;처</span>
+            <input class="phone" type="tel" name="phone" th:value="${vo.phone}" autocomplete="off">
+            <br>
+            <span class="titleText">이&ensp;메&ensp;일</span>
+            <input class="email" type="email" name="email" th:value="${vo.email}" autocomplete="off">
+            <br>
+            <span class="titleText">우편번호</span>
+            <input class="zipcode" type="text" name="zipcode" th:value="${vo.zipcode}" readonly autocomplete="off">
+            <button type="button" class="btnPost">우편번호검색</button>
+            <br>
+            <span class="titleText">기본주소</span>
+            <input class="address1" type="text" name="address1" th:value="${vo.address1}" readonly autocomplete="off">
+            <br>
+            <span class="titleText">상세주소</span>
+            <input class="address2" type="text" name="address2" th:value="${vo.address2}" autocomplete="off">
+        </div>
+        <div class="btnZone">
+            <button type="button" class="btnHome">취소</button>
+            <button type="button" class="btnProfileModifyR">수정</button>
+        </div>
+        <input type="hidden" name="sno" th:value="${vo.sno}">
+    </form>
+</body>
+
+</html>

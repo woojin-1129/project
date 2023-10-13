@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="notionRepl">
+
+  <resultMap id="NotionMap" type="NotionVo" autoMapping="true">
+  <collection property="employees" resultMap="employeesMap"></collection>
+  </resultMap>
+
+<resultMap id="NotionReplMap" type="NotionReplVo" autoMapping="true">
+  <collection property="employees" resultMap="employeesMap"></collection>
+  <collection property="notionPsno" resultMap="NotionMap"></collection>
+</resultMap>
+
+<resultMap id="teamMap" type="TeamVo" autoMapping="true"></resultMap>
+<resultMap id="DepartmentMap" type="DepartmentVo" autoMapping="true"></resultMap>
+<resultMap id="TierCodeMap" type="TierCodeVo" autoMapping="true"></resultMap>
+
+<resultMap id="employeesMap" type="EmployeesVo" autoMapping="true">
+    <collection property="team" resultMap="teamMap"></collection>
+    <collection property="department" resultMap="DepartmentMap"></collection>
+    <collection property="tierCode" resultMap="TierCodeMap"></collection>
+</resultMap>
+
+<insert id="repl" parameterType="NotionReplVo">
+    insert into notionRepl( creDate , employeeNumber , notionSno , doc , serial)
+    values( sysDate() , #{employeeNumber} , #{sno} , #{doc} , #{serial})
+</insert>
+
+<select id="replSelect" parameterType="Integer" resultMap="NotionReplMap">
+select n.sno , n.serial ,n.doc , n.creDate , n.employeeNumber , n.notionSno , e.name , d.departName , t.teamName , ti.tierName , e.tier , e.comName , e.teamCode
+from notionrepl n 
+join employees e on n.employeeNumber = e.employeeNumber
+join department d on d.departCode = e.departCode
+join team t on t.teamCode = e.teamCode
+join tierCode ti on ti.tier = e.tier
+where notionSno = #{_parameter}
+order by n.serial desc
+</select>
+
+<select id="getNotionReplSno" parameterType="Integer" resultType="Integer">
+  select getNotionReplSno(#{_parameter})
+</select>
+
+<delete id="delete" parameterType="Integer">
+  delete from notionrepl where sno = #{_parameter}
+</delete>
+
+<update id="update" parameterType="NotionReplVo">
+  update notionrepl set doc=#{doc} where sno = #{sno}
+</update>
+
+</mapper>

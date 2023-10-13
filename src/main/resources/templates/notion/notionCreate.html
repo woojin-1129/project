@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+    integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <script defer src="/js/notion.js"></script>
+  <link rel="stylesheet" href="/css/notion/notionCreate.css">
+</head>
+
+<body>
+  <form name="frmNotionCreate" class="frmNotionCreate">
+    <div class="createContainer">
+      <div class="createSubject">
+        <span>제목</span>
+        <input type="text" name="title" class="title" />
+      </div>
+      <div class="createFile">
+        <input type="file" name="attFile" multiple />
+      </div>
+      <textarea name="doc" id="doc" class="doc" cols="30" rows="10" placeholder="내용"></textarea>
+      <br />
+      <button type="button" class="btnCreateR">등록</button>
+      <button type="button" class="btnCancel">취소</button>
+    </div>
+  </form>
+</body>
+
+</html>

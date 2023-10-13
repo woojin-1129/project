@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- resources/mapper/CalendarMapper.xml -->
+<mapper namespace="calendar">
+
+	<resultMap type="CalendarVo" id="calMap">
+		<result property="start" column="startDate"/>
+		<result property="end" column="endDate"/>
+		<!-- 나머지 프로퍼티들도 필요하다면 추가 -->
+	</resultMap>
+
+	<insert id="insertEvent">
+			INSERT INTO calendar (
+				employeeNumber, teamCode, departCode, title, startDate, endDate, backgroundColor, allDay, textColor
+			)
+			VALUES (
+				#{employeeNumber}, #{teamCode}, #{departCode},#{title}, 
+				#{start}, #{end}, #{backgroundColor}, #{allDay}, #{textColor}
+			)
+	</insert>
+
+	<select id="selectAll" resultMap="calMap" parameterType="CalendarVo">
+		SELECT * FROM calendar 
+		WHERE employeeNumber = #{employeeNumber} 
+		OR teamCode = #{teamCode} 
+		OR departCode = #{departCode}
+	</select>
+
+	<update id="modify" parameterType="CalendarVo">
+		UPDATE calendar
+		SET title = #{title},
+		allDay = #{allDay},
+		startDate = #{start},
+		endDate = #{end}
+		WHERE id = #{id}
+	</update>
+
+	<delete id="delete" parameterType="Integer">
+		DELETE FROM calendar WHERE id = #{id}
+	</delete>
+
+	<select id="selectLastInsertId" resultType="Integer">
+		SELECT LAST_INSERT_ID();
+	</select>
+</mapper>

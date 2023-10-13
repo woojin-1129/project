@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Document</title>
+	<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+	<script defer src="/js/notion.js"></script>
+	<link rel="stylesheet" href="/css/notion/notionRepl.css" />
+</head>
+
+<body>
+	<div class="result">
+		<div class="list" th:each="n : ${list}">
+			<input type="hidden" class="notionSno" th:value="${n.notionSno}">
+			<form name="frmNotionRepl" class="frmNotionRepl">
+				<input type="hidden" name="sno" th:value="${n.sno}">
+				<span th:if="${n.employees.tier eq 1}" th:text="${n.employees.comName}"></span>
+				<span class="name" th:if="${n.employees.tier ne 1}"
+					th:text="${n.employees.teamCode ne '0' } ? ${n.employees.team.teamName} : ${n.employees.department.departName}"></span>
+				<span class="name" th:text="${n.employees.name}"></span>
+				<span class="name" th:text="${n.employees.tierCode.tierName}"></span>
+				<div class="doc" th:text="${n.doc}" id="doc"></div>
+				<span class="creDate" th:text="${n.creDate}">23131</span>
+				<div class="btnContainner">
+					<button type="button" class="btnReplModify" onclick="replModify(this.form)">수정</button>
+					<button type="button" class="btnReplDelete" onclick="replDelete(this.form)">삭제</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>

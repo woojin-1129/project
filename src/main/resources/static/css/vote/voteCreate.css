@@ -1,0 +1,76 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+  }
+  
+  h1 {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin: 20px 0;
+  }
+  
+  .frmVoteCreate {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  .questionContainner, .typeContainner, .dateContainner, .selectionContainner {
+    margin-bottom: 20px;
+  }
+  
+  .title, .startDate, .endDate, .selectDoc {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+  
+  .typeValue {
+    margin-right: 10px;
+  }
+  
+  .dateContainner span {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  .typeContainner label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .btnMinus, .btnPlus, .btnCancel, .btnVoteSubmmit {
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+
+    .btnMinus,
+    .btnPlus {
+      background-color: rgb(80, 80, 80);
+    }
+
+  .btnCancel {
+        background-color: #fff;
+          border: 1px solid #555;
+          color: #555;
+  }
+  
+  .btnVoteSubmmit {
+    width: 100px;
+    background-color: #007bff;
+    float: right;
+  }
+  

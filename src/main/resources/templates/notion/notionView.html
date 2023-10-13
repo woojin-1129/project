@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Document</title>
+	<script src="https://code.jquery.com/jquery-3.7.0.min.js"
+		integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+	<script defer src="/js/notion.js"></script>
+	<link rel="stylesheet" href="/css/notion/notionView.css">
+</head>
+
+<body>
+	<div id="notion">
+		<form name="frmNotionView" class="frmNotionView">
+
+			<!-- action과 enctype은 js에서 하는게 편함 -->
+			<details class="attZone" th:each="att : ${vo.attFiles}">
+				<summary>첨부파일</summary>
+				<a download th:href="@{'/upload/'+${att.sysFile}}"> [[${att.oriFile}]] </a>
+			</details>
+			<span>작성자</span>
+			<input type="text" name="viewName" th:value="${vo.employees.name}" readonly />
+			<br />
+			<span>작성일</span>
+			<input type="text" name="viewCreDate" th:value="${vo.creDate}" readonly />
+			<br />
+			<span>제 &ensp; 목</span>
+			<input type="text" name="viewTitle" class="viewTitle" th:value="${vo.title}" readonly />
+			<br>
+			<span>내용</span>
+			<div class="viewDoc" name="viewDoc" th:text="${vo.doc}"></div>
+			<div class="notionBtnZone">
+				<button type="button" class="btnDelete"
+					th:if="${vo.employeeNumber eq session.employeeNumber or session.admin ne null}">삭제</button>
+				<button type="button" class="btnModify"
+					th:if="${vo.employeeNumber eq session.employeeNumber}">수정</button>
+				<button type="button" class="btnList">목록으로</button>
+			</div>
+
+			<div class="replZone">
+				<span class="replText">댓글입력</span>
+				<textarea type="text" name="doc" class="replDoc"></textarea>
+				<button type="button" class="btnReplSummit">등록</button>
+			</div>
+			<section name="resultRepl" class="resultRepl"></section>
+			<input type="hidden" name="sno" class="sno" th:value="${vo.sno}" />
+		</form>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,81 @@
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f8f8f8;
+}
+
+.startContainner {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 20px;
+	background-color: #fff;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	border-radius: 8px;
+}
+
+.question {
+	font-size: 24px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.employeesName {
+	font-size: 18px;
+	font-weight: bold;
+	margin-bottom: 20px;
+	display: block;
+}
+
+.main {
+	border-top: 1px solid #ccc;
+	padding-top: 20px;
+	margin-top: 20px;
+}
+
+.main>span {
+	font-size: 16px;
+	margin-bottom: 10px;
+}
+
+.selectDoc,
+.selectDocT {
+	display: inline-block;
+	width: 600px;
+	margin-bottom: 10px;
+}
+
+.selectDoc , .selectCount {
+	border-bottom: 1px solid #ccc;
+}
+
+.selectCount,
+.selectCountT{
+	display: inline-block;
+	width: 150px;
+	text-align: center;
+	margin-left: -4px;
+}
+
+.userSelect {
+	margin-top: 20px;
+}
+
+.btnVoteList {
+	margin-top: 20px;
+		background-color: #fff;
+	border: 1px solid #555;
+	color: #555;
+	padding: 10px 20px;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.btnVoteDeleteR {
+	background-color: #fff;
+	color: #dc3545;
+	border: 1px solid #dc3545;
+	padding: 10px 20px;
+	border-radius: 4px;
+	cursor: pointer;
+	float: right;
+	transform: translateY(18px);
+}

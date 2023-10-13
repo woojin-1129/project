@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Document</title>
+	<script src="https://code.jquery.com/jquery-3.7.0.min.js"
+		integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+	<script defer src="/js/notion.js"></script>
+	<link rel="stylesheet" href="/css/notion/notionModify.css">
+</head>
+
+<body>
+	<div id="notion">
+		<form name="frmNotionModify" class="frmNotionModify" method="post">
+			<!-- action과 enctype은 js에서 하는게 편함 -->
+			<span>작성자</span>
+			<input type="text" name="name" readonly th:value="${vo.employees.name}" />
+			<br />
+			<span>작성일</span>
+			<input type="text" name="creDate" readonly th:value="${vo.creDate}" />
+			<br />
+			<span>제 &ensp; 목</span>
+			<input type="text" name="title" th:value="${vo.title}" placeholder="제목을 입력하세요" />
+			<br />
+			<textarea name="doc" th:value="${vo.doc}"></textarea>
+			<br />
+			<span>첨부</span>
+			<input type="file" name="attFile" multiple />
+			<!-- 기존에 첨부된 파일 정보 -->
+			<div class="delAttFile">
+				<th:block th:each="att : ${vo.attFiles}">
+					<label>
+						<input type="checkbox" name="delFile" th:value="${att.sysFile}" onclick="delCheck(this)"
+							value="aaaa.png" />
+						<th:block th:text="${att.oriFile}" />
+					</label>
+					<br />
+				</th:block>
+			</div>
+			<hr />
+			<button type="button" class="btnModifyR">수정</button>
+			<button type="button" class="btnList">목록으로</button>
+			<input type="hidden" name="sno" th:value="${vo.sno}" />
+			<input type="hidden" name="findStr" th:value="${page.findStr}" />
+			<input type="hidden" name="nowPage" th:value="${page.nowPage}" />
+		</form>
+	</div>
+</body>
+
+</html>

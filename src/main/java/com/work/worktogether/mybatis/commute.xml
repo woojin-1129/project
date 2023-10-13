@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="commute">
+
+    <resultMap id="teamMap" type="TeamVo" autoMapping="true"></resultMap>
+    <resultMap id="DepartmentMap" type="DepartmentVo" autoMapping="true"></resultMap>
+    <resultMap id="TierCodeMap" type="TierCodeVo" autoMapping="true"></resultMap>
+
+    <resultMap id="employeesMap" type="EmployeesVo" autoMapping="true">
+        <collection property="team" resultMap="teamMap"></collection>
+        <collection property="department" resultMap="DepartmentMap"></collection>
+        <collection property="tierCode" resultMap="TierCodeMap"></collection>
+    </resultMap>
+
+
+    <resultMap id="CommuteMap" type="CommuteVo" autoMapping="true">
+        <collection property="employees" resultMap="employeesMap"></collection>
+    </resultMap>
+
+    <resultMap id="CommuteCountMap" type="CommuteCountVo" autoMapping="true">
+        <collection property="employees" resultMap="employeesMap"></collection>
+    </resultMap>
+
+    <select id="select" parameterType="PageCommute" resultMap="CommuteMap">
+        select c.sno , c.employeeNumber , e.name , c.goWork , c.leaveWork
+        from commute c join employees e
+        on c.employeeNumber = e.employeeNumber
+        where c.employeeNumber = #{findStr} or e.name like '%${findStr}%' or
+        c.goWork like '%${findStr}%' or c.leaveWork like '%${findStr}%'
+        order by sno desc
+        limit #{startNo} , #{listSize}
+    </select>
+
+    <select id="totSize" parameterType="PageCommute" resultType="Integer">
+        select count(c.sno) totSize
+        from commute c join employees e
+        on c.employeeNumber = e.employeeNumber
+        where c.employeeNumber = #{findStr} or e.name like '%${findStr}%' or
+        c.goWork like '%${findStr}%' or c.leaveWork like '%${findStr}%'
+    </select>
+
+    <select id="currentDate" resultType="String">
+        SELECT current_date()
+    </select>
+
+    <select id="totEmployees" resultType="Integer">
+        select count(sno) from employees;
+    </select>
+
+    <select id="goWorkEmployees" parameterType="CommuteVo" resultType="Integer">
+        select count(sno) from commute
+        where goWork like '%${current}%'
+    </select>
+
+    <select id="leaveWorkEmployees" parameterType="CommuteVo" resultType="Integer">
+        select count(sno) from commute 
+        where leaveWork like '%${current}%'
+    </select>
+
+    <select id="toDaySelect" parameterType="PageCommute" resultMap="CommuteMap"> 
+        select c.sno , c.employeeNumber , e.name , c.goWork , c.leaveWork 
+        from commute c join employees e 
+        on c.employeeNumber = e.employeeNumber 
+        where (c.employeeNumber = #{findStr} or e.name like '%${findStr}%' or
+        c.goWork like '%${findStr}%' or c.leaveWork like '%${findStr}%') and goWork like '%${current}%' 
+        order by sno desc 
+        limit #{startNo} , #{listSize} 
+    </select>
+
+    <select id="toDayTotSize" parameterType="PageCommute" resultType="Integer">
+        select count(c.sno) totSize
+        from commute c join employees e
+        on c.employeeNumber = e.employeeNumber
+        where (c.employeeNumber = #{findStr} or e.name like '%${findStr}%' or
+        c.goWork like '%${findStr}%' or c.leaveWork like '%${findStr}%') and goWork like '%${current}%'  
+    </select>
+
+    <select id="mySelect" parameterType="Page" resultMap="CommuteMap"> select n.sno,
+        n.employeeNumber,n.goWork , n.leaveWork,e.name from commute n join employees e on
+        n.employeeNumber = e.employeeNumber where n.employeeNumber = #{employeeNumber} order by
+        n.sno desc limit #{startNo},#{listSize} </select>
+
+    <select id="myTotSize" parameterType="Page" resultType="Integer"> 
+        select count(sno) totSize from commute where employeeNumber = #{employeeNumber} 
+    </select>
+
+    <select id="workPrint" parameterType="String" resultType="Integer"> 
+        select count(sno) from commute 
+        where (DATE(goWork) = current_date()) and employeeNumber = #{_parameter} 
+    </select>
+
+    <select id="workExit" parameterType="String" resultType="Integer"> 
+        select count(sno) from commute where (DATE(leaveWork) = current_date()) and employeeNumber = #{_parameter} 
+    </select>
+
+    <insert id="insert" parameterType="String"> 
+        insert into commute (employeeNumber,goWork)
+        values (#{_parameter} , sysDate()) 
+    </insert>
+
+    <update id="update" parameterType="String"> 
+        update commute set leaveWork = sysDate()
+        where (DATE(goWork) = current_date()) and employeeNumber = #{_parameter} 
+    </update>
+
+</mapper>

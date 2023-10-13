@@ -1,0 +1,90 @@
+.frm {
+    width: 700px;
+    height: 718px;
+    margin: 0px auto;
+    padding-top: 20px;
+}
+.paymentTitle {
+    margin: 0px auto;
+    width: 250px;
+    height: 50px;
+    text-align: center;
+    border-bottom: 6px double black;
+}
+
+.pay {
+    text-align: center;
+    margin-top: 20px;
+        margin-bottom: 15px;
+}
+
+.pay input {
+    width: 200px;
+    height: 28px;
+    outline: none;
+    cursor: default;
+    text-align: right;
+}
+
+.payDate {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    text-align: center;
+}
+
+.payDateText {
+    display: inline-block;
+    width: 50px;
+}
+
+.initiativeDate,
+.PaymentDate,
+.expenditure {
+    width: 150px;
+    font-size: 14pt;
+}
+
+.history {
+    text-align: center;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    border-bottom: 2px solid black;
+}
+
+.docTitle {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid black;
+}
+
+.briefsTitle,
+.amountTitle,
+.noteTitle {
+    display: inline-block;
+    text-align: center;
+    width: 220px;
+
+}
+
+.doc {
+    padding: 10px;
+}
+
+.briefs,
+.note,
+.amount {
+    display: inline-block;
+    width: 220px;
+    height: 25px;
+    margin-bottom: 2px;
+}
+
+.amount {
+    text-align: right;
+}

@@ -1,0 +1,233 @@
+.frm {
+    width: 700px;
+    height: 718px;
+    margin: 30px auto;
+}
+
+.top {
+    height: 100px;
+    border-left: 2px solid black;
+}
+
+.top>.topText {
+    padding-top: 20px;
+    text-align: center;
+    vertical-align: top;
+    width: 36px;
+    height: 100%;
+    display: inline-block;
+    border-top: 2px solid black;
+    border-right: 2px solid black;
+}
+
+.signBox {
+    margin-left: -6px;
+    width: 115px;
+    height: 100%;
+    display: inline-block;
+    border-right: 2px solid black;
+    border-top: 2px solid black;
+}
+
+.signCk {
+    width: 100%;
+    text-align: center;
+    line-height: 80px;
+    height: 75%;
+    border-bottom: 2px solid black;
+}
+
+.signName {
+    width: 100%;
+    text-align: center;
+}
+
+.bottom {
+    position: relative;
+    width: 700px;
+    height: 620px;
+    border: 2px solid black;
+}
+
+.iniName {
+    position: absolute;
+    right: 0;
+    top: -25px;
+}
+
+.bottom>.bottomTitle {
+    margin: 0px auto;
+    width: 250px;
+    height: 50px;
+    text-align: center;
+    border-bottom: 6px double black;
+}
+
+.pay {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+.payDate {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    text-align: center;
+}
+
+.payDateText {
+    display: inline-block;
+    width: 50px;
+}
+
+.history {
+    text-align: center;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    border-bottom: 2px solid black;
+}
+
+.docTitle {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid black;
+}
+
+.briefsTitle,
+.amountTitle,
+.noteTitle {
+    display: inline-block;
+    text-align: center;
+    width: 220px;
+
+}
+
+.doc {
+    padding: 10px;
+}
+
+.briefs,
+.note,
+.amount {
+    display: inline-block;
+    text-align: center;
+    width: 225px;
+    height: 100%;
+    margin-right: -4px;
+}
+.docList {
+    display: inline-block;
+    height: 28px;
+    border-bottom: 1px solid black;
+}
+.docList:last-child {
+    border-bottom: none;
+}
+
+.briefs {
+    border-right: 1px solid black;
+}
+
+.amount {
+    border-right: 1px solid black;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.signBtnZone {
+    margin-top: 20px;
+    text-align: center;
+}
+.signBtnZone .btnCk,
+.signBtnZone .btnRejection,
+.signBtnZone .btnSignHome,
+.signBtnZone .btnModify,
+.signBtnZone .btnDelete,
+.signBtnZone .btnSubmit {
+    margin-top: 20px;
+        padding: 8px 16px;
+        border-radius: 4px;
+            cursor: pointer;
+}
+.btnSignHome {
+    background-color: #fff;
+	border: 1px solid #555;
+	color: #555;
+}
+
+.signBtnZone .btnCk , .signBtnZone .btnSubmit {
+    background-color: #007bff;
+    border: none;
+    color: #fff;
+}
+
+.signBtnZone .btnRejection , .signBtnZone .btnDelete {
+   	background-color: #fff;
+	color: #dc3545;
+	border: 1px solid #dc3545;
+}
+.signBtnZone .btnModify {
+    background-color: #fff;
+	border: 1px solid rgb(60, 168, 60);
+	color: rgb(60, 168, 60);
+}
+
+.rejectionModal {
+    position: absolute;
+    z-index: 99999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(146, 146, 146, 0.3)
+}
+
+.rejectionComment {
+    position: absolute;
+    left: 40%;
+    top: 30%;
+    width: 500px;
+    height: 350px;
+    background-color: white;
+    border-radius: 10px;
+
+    padding: 10px;
+}
+
+.rejection {
+    width: 100%;
+    height: 200px;
+    resize: none;
+    word-wrap: break-word;
+    font-size: 14pt;
+}
+
+.modalBtnZone {
+    margin-top: 15px;
+    text-align: center;
+}
+.rejectionComment .btnRejectionR ,
+.rejectionComment .btnModalDelete {
+    width: 100px;
+        height: 30px;
+        border-radius: 4px;
+}
+
+.rejectionComment .btnRejectionR {
+        background-color: #fff;
+            color: #dc3545;
+            border: 1px solid #dc3545;
+}
+
+.rejectionComment .btnModalDelete {
+    background-color: #fff;
+        border: 1px solid #555;
+        color: #555;
+    
+}

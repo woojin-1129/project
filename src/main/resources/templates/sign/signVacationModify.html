@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>잇다</title>
+    <link rel="stylesheet" href="/css/sign/signVacation.css">
+    <script src="/js/sign.js"></script>
+</head>
+
+<body>
+
+    <form name="frm" class="frm" method="post">
+            <div class="vacationTitle">
+                <h1>휴 가 계 획 서</h1>
+            </div>
+            <div class="vacationDateText">
+                <span>휴가기간</span>
+            </div>
+            <div class="vacationDate">
+                <input type="date" name="startDate" class="startDate" th:value="${vo.startDate}">
+
+                <span>~</span>
+
+                <input type="date" name="endDate" class="endDate" th:value="${vo.endDate}">
+            </div>
+            <div class="history">휴가계획서</div>
+            <div class="docZone">
+                <textarea name="doc" class="doc" th:text="${vo.doc}"></textarea>
+            </div>
+
+            <div class="btnZone">
+                <button type="button" class="btnModifyR">수정</button>
+                <span>&emsp;</span>
+                <button type="button" class="btnSignHome">취소</button>
+            </div>
+        <input type="hidden" name="nowPage" class="nowPage" th:value="${page.nowPage}">
+        <input type="hidden" name="findStr" class="findStr" th:value="${page.findStr}">
+        <input type="hidden" name="kind" class="kind" th:value="${kind}">
+        <input type="hidden" name="pSno" class="pSno" th:value="${vo.pSno}">
+    </form>
+</body>
+
+</html>

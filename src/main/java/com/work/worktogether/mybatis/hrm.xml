@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper      
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"      
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="hrm">
+    <resultMap id="teamMap" type="TeamVo" autoMapping="true"></resultMap>
+    <resultMap id="DepartmentMap" type="DepartmentVo" autoMapping="true"></resultMap>
+    <resultMap id="TierCodeMap" type="TierCodeVo" autoMapping="true"></resultMap>
+
+    <resultMap id="employeesMap" type="EmployeesVo" autoMapping="true">
+        <collection property="team" resultMap="teamMap"></collection>
+        <collection property="department" resultMap="DepartmentMap"></collection>
+        <collection property="tierCode" resultMap="TierCodeMap"></collection>
+    </resultMap>
+
+    <!-- List-->
+    <select id="all" resultMap="employeesMap">
+        select * from employees e 
+        join department d
+        on e.departCode = d.departCode 
+        join team t
+        on e.teamCode = t.teamCode
+        join tiercode tc
+        on e.tier = tc.tier
+        order by sno asc
+    </select>
+
+    <select id="select" parameterType="Page" resultMap="employeesMap">
+        select e.sno, d.departName, t.teamName, tc.tierName , e.name, e.employeeNumber, e.joinCompany, e.phone
+        from employees e
+        join department d on e.departCode = d.departCode
+        join team t on e.teamCode = t.teamCode
+        join tierCode tc on e.tier = tc.tier
+        where e.name like '%${findStr}%'
+        or    departName   like '%${findStr}%'
+        or    teamName   like '%${findStr}%'
+        or    phone   like '%${findStr}%'
+        or    joinCompany   like '%${findStr}%'
+        or    tc.tierName   like '%${findStr}%'
+        order by e.sno asc
+        limit ${startNo}, ${listSize}
+    </select>
+
+    <select id="totSize" parameterType="Page" resultType="Integer">
+        select count(sno) totSize
+        from employees e
+        left join department d
+        on e.departCode = d.departCode 
+        left join team t
+        on e.teamCode = t.teamCode
+        where name like '%${findStr}%'
+        or tier like '%${findStr}%'
+    </select>
+
+    <!-- view-->
+    <select id="view" parameterType="Integer" resultMap="employeesMap">
+        select * from employees e 
+        left join department d
+        on e.departCode = d.departCode 
+        left join team t
+        on e.teamCode = t.teamCode 
+        join tiercode tc
+        on e.tier = tc.tier
+        where sno = #{_parameter}
+    </select>
+
+    <select id="teamName" parameterType="String" resultType="TeamVo">
+        select teamName,teamCode from team
+        where departCode = #{_parameter}
+    </select>
+
+    <select id="dirNumber" parameterType="EmployeesVo" resultType="String">
+        select employeeNumber from employees
+        where tier = #{tier} and departCode = #{departCode} and teamCode = #{teamCode}
+        order by sno asc
+        limit 0 , 1
+    </select>
+
+    <!-- register-->
+    <select id="getEmployeeNumber" resultType="String">
+        select getEmployeeNumber()
+    </select>
+
+    <insert id="register" parameterType="EmployeesVo">
+        insert into employees(sno, employeeNumber, comName, id, pwd, name,
+         tier, email, tel, phone, zipcode, address1, address2, teamCode, departCode,
+          birthday, joinCompany )
+        values(#{sno}, #{employeeNumber}, #{comName}, #{id}, #{pwd}, #{name},
+         #{tier}, #{email}, #{tel}, #{phone}, #{zipcode}, #{address1}, #{address2},
+          #{teamCode}, #{departCode}, #{birthday}, #{joinCompany} )
+    </insert>
+    <insert id="registerAtt" parameterType="EmployeesVo">
+        insert into employees(oriPhoto , sysPhoto )
+        values(#{oriPhoto} , #{sysPhoto} )
+    </insert>
+    
+    <select id="getSno" parameterType="String" resultType="Integer">
+        select getSno(#{_parameter})
+    </select>
+
+    <!-- delete-->
+    <delete id="delete" parameterType="Integer">
+        delete from employees where sno=#{_parameter}
+    </delete>
+
+    <!-- hrm-mapper.xml -->
+    <update id="updateText" parameterType="EmployeesVo">
+        update employees
+        set employeeNumber=#{employeeNumber}, comName=#{comName}, id=#{id}, pwd=#{pwd},
+        name=#{name}, tier=#{tier}, email=#{email}, tel=#{tel}, phone=#{phone},
+        zipcode=#{zipcode}, address1=#{address1}, address2=#{address2},
+        teamCode=#{teamCode}, departCode=#{departCode},
+        birthday=#{birthday}, joinCompany=#{joinCompany}
+        where sno=#{sno}
+    </update>
+
+    <update id="updateImage" parameterType="EmployeesVo">
+        update employees
+        set sysPhoto=#{sysPhoto}, oriPhoto=#{oriPhoto}
+        where sno=#{sno}
+    </update>
+
+    <select id="allDepartment" resultType="DepartmentVo">
+        select departCode , departName from department
+    </select>
+
+    <select id="allTierCode" resultType="TierCodeVo">
+        select tier , tierName from tierCode
+        order by tier desc
+    </select>
+
+    <select id="allTeam" parameterType="String" resultType="TeamVo">
+        select teamCode , teamName , departCode from team
+        where departCode = #{_parameter}
+    </select>
+</mapper>

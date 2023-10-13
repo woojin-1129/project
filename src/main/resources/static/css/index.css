@@ -1,0 +1,403 @@
+* {
+    box-sizing: border-box;
+    color: #202020;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    overflow-y: hidden;
+}
+
+#index {
+    width: 1500px;
+    height: 1000px;
+    margin: 0 auto;
+    user-select: none;
+}
+
+.head {
+    position: relative;
+    height: 6%;
+    background-color: #f8f9fb;
+    border-bottom: 1px solid #ccc;
+    user-select: none;
+    /* box-shadow: 0px -5px 10px 0.1px #ccc; */
+}
+
+#content {
+    margin-top: 0px;
+    display: flex;
+    /* 이거없으면 안뜸?? */
+
+    height: 94%;
+
+    user-select: none;
+    border-right: 1px solid #ccc;
+    /* box-shadow: -2px -2px -2px 2px #ccc; */
+}
+
+.menuZone {
+    text-align: left;
+    width: 200px;
+    height: 100%;
+    background-color: #f8f9fb;
+    border-right: 1px solid #ccc;
+    font-size: 13pt;
+    user-select: none;
+    /* box-shadow: -1px 0px 10px 0.1px #ccc; */
+}
+
+.menuZone .work {
+    transform: translateY(5px);
+    width: 100%;
+    height: 70px;
+}
+
+.menuZone .work>div {
+    cursor: pointer;
+}
+
+.workGo,
+.workLeave {
+    display: inline-block;
+    position: relative;
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    font-size: 0.9em;
+    font-weight: 600;
+}
+
+.workGo {
+    background-color: #ecf2ff;
+    padding-left: 20px;
+    color: #444;
+}
+
+.workLeave {
+    position: absolute;
+    top: 0px;
+    color: #444;
+    padding-left: 20px;
+    font-size: 0.9em;
+    background-color: #ffc3c38c;
+}
+
+.workSelect {
+    text-align: center;
+    font-size: 0.9em;
+    font-weight: 600;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    color: #444;
+    background-color: #8a8a8a8e;
+}
+.bibi-lightbulb,
+.bibi-lightbulb-off{
+    position: absolute;
+    top: 10px;
+    left: 25px;
+}
+
+.menuZone .boardTitle,
+.menuZone .msgTitle,
+.menuZone .employeeManagementTitle {
+    line-height: 50px;
+    font-weight: 600;
+    background-color: #f8f9fb;
+    color: #444;
+    padding-left: 42px;
+    border-bottom: 1px solid #ccc;
+    position: relative;
+}
+
+.menuZone .notionBoard,
+.menuZone .boardMain,
+.menuZone .boardDepartment,
+.menuZone .boardTeam,
+.menuZone #index-btnSendNote,
+.menuZone .hrmView,
+.menuZone .attendance,
+.menuZone .bossZone {
+    padding-left: 25px;
+    font-size: 0.8em;
+    font-weight: 600;
+    margin-bottom: 4px;
+    height: 42px;
+    line-height: 42px;
+    font-size: 0.8em;
+    color: #666;
+    position: relative;
+    /* border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px; */
+}
+
+.menuZone #index-btnCalendar,
+.menuZone .votingBoard,
+.menuZone .sign,
+.menuZone .ocView {
+    font-size: 0.8em;
+    font-weight: 600;
+    margin-bottom: 4px;
+    height: 42px;
+    line-height: 42px;
+    font-size: 0.8em;
+    color: #666;
+    position: relative;
+    padding-left: 45px;
+}
+
+.menuZone .index-getNote {
+    font-size: 0.8em;
+    font-weight: 600;
+    margin-bottom: 4px;
+    height: 42px;
+    line-height: 42px;
+    color: #666;
+    padding-left: 43px;
+    transform: translateX(-1px) ;
+    width: 200px;
+    position: relative;
+}
+
+.menuZone .notionBoard:hover,
+.menuZone .boardMain:hover,
+.menuZone .boardDepartment:hover,
+.menuZone .boardTeam:hover,
+.menuZone #index-btnSendNote:hover,
+.menuZone #index-btnCalendar:hover,
+.menuZone .votingBoard:hover,
+.menuZone .sign:hover,
+.menuZone .ocView:hover,
+.menuZone .attendance:hover,
+.menuZone .hrmView:hover,
+.menuZone .bossZone:hover {
+    text-decoration: underline;
+    background-color: #ebedf1;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.menuZone .index-getNote:hover {
+    text-decoration: underline;
+    background-color: #ebedf1;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.menuZone .notionBoard,
+.menuZone .boardMain,
+.menuZone .boardDepartment,
+.menuZone .boardTeam,
+.menuZone #index-btnSendNote,
+.menuZone .attendance,
+.menuZone .hrmView,
+.menuZone .bossZone {
+    padding-left: 44px;
+}
+
+/* 타이틀 아이콘 */
+.bibi-person-check-fill,
+.bibi-card-heading,
+.bibi-envelope {
+    position: absolute;
+    left: 13px;
+    bottom: 13px;
+}
+
+/* 서브메뉴 아이콘 */
+.bibi-calendar-range,
+.bibi-check2-circle,
+.bibi-clipboard-check,
+.bibi-diagram-3 {
+    position: absolute;
+    left: 13px;
+    bottom: 13px;
+}
+
+/* 사이드바 상태창 */
+.menuZone .notionBoard .notionBoardState,
+.menuZone .boardMain .boardMainState,
+.menuZone .boardDepartment .boardDepartmentState,
+.menuZone .boardTeam .boardTeamState,
+.menuZone #index-btnSendNote .index-btnSendNoteState,
+.menuZone #index-btnCalendar .index-btnCalendarState,
+.menuZone .votingBoard .votingBoardState,
+.menuZone .sign .signState,
+.menuZone .ocView .ocViewState,
+.menuZone .hrmView .hrmViewState,
+.menuZone .attendance .attendanceState,
+.menuZone .bossZone .bossZoneState {
+    position: absolute;
+    right: 0px;
+    width: 5px;
+    background-color: #f8f9fb;
+    height: 100%;
+    bottom: 0px;
+}
+
+.index-getNoteState {
+    position: absolute;
+    width: 5px;
+    z-index: 1000;
+    background-color: #f8f9fb;
+    height: 100%;
+    right: 0px;
+    bottom: 0px;
+}
+
+.viewer {
+    width: 1300px;
+    background-color: #f8f9fb;
+    user-select: none;
+    border: none;
+}
+#index-unRead{
+    position: absolute;
+    right: 70px;
+}
+
+.work {
+    margin-bottom: 10px;
+}
+
+.board,
+.msg,
+.plus {
+    border-bottom: 2px solid #ccc;
+    margin-bottom: 5px;
+}
+
+/*  */
+.head>div {
+    display: inline-block;
+}
+
+.logoImgZone {
+    width: 150px;
+    height: 59px;
+    margin-left: 40px;
+    padding-top: 10px;
+    overflow: hidden;
+}
+
+.logoImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.chat {
+    cursor: pointer;
+    position: absolute;
+    text-align: center;
+    width: 45px;
+    height: 45px;
+    line-height: 12px;
+    font-size: small;
+    top: 15px;
+    right: 150px;
+    display: inline-block;
+    color: #555;
+    border-radius: 25%;
+}
+
+.profile {
+    position: absolute;
+    right: 10px;
+
+    width: 120px;
+    height: 100%;
+}
+
+.profileName {
+    position: absolute;
+    left: 0;
+    bottom: 18px;
+    cursor: pointer;
+}
+
+.profileImg {
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+
+    width: 40px;
+    height: 40px;
+
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.profileMenu {
+    position: absolute;
+    z-index: 999999;
+    right: 0px;
+    top: 50px;
+
+    text-align: center;
+    padding: 10px;
+    width: 100px;
+
+
+    border: 1px solid #ccc;
+
+    border-radius: 10px;
+    background-color: white;
+}
+
+.profileMenu>button {
+    width: 70px;
+    height: 30px;
+    font-size: 10pt;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.profileMenu>.btnEmployModify {
+    background-color: #fff;
+        border: 1px solid rgb(60, 168, 60);
+        color: rgb(60, 168, 60);
+}
+
+.profileMenu>.btnLogout {
+        background-color: #fff;
+            border: 1px solid #555;
+            color: #555;
+}
+
+.messageZone {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+
+    width: 350px;
+
+}
+
+.notification {
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-top: 6px;
+    background-color: #333;
+    color: white;
+
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s, transform 0.5s;
+}
+
+.notification.show {
+    opacity: 1;
+    transform: translateY(0);
+}
